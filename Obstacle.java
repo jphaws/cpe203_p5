@@ -17,4 +17,6 @@ public class Obstacle extends AbstractEntity {
         return new Obstacle(id, position, images);
     }
 
+
+
 }

@@ -45,22 +45,22 @@ public class Crab extends AbstractMoveableEntity{
                 nextPeriod);
     }
 
-    public boolean moveTo(AbstractMoveableEntity crab, WorldModel world,
+    public boolean moveTo(AbstractMoveableEntity Entity, WorldModel world,
                           AbstractEntity target, EventScheduler scheduler) {
-        if (adjacent(crab.getPosition(), target.getPosition())) {
+        if (adjacent(Entity.getPosition(), target.getPosition())) {
             world.removeEntity(target);
             scheduler.unscheduleAllEvents(target);
             return true;
         } else {
-            Point nextPos = crab.nextPosition(world, target.getPosition());
+            Point nextPos = Entity.nextPosition(world, target.getPosition());
 
-            if (!crab.getPosition().equals(nextPos)) {
+            if (!Entity.getPosition().equals(nextPos)) {
                 Optional<AbstractEntity> occupant = world.getOccupant(nextPos);
                 if (occupant.isPresent()) {
                     scheduler.unscheduleAllEvents(occupant.get());
                 }
 
-                world.moveEntity(crab, nextPos);
+                world.moveEntity(Entity, nextPos);
             }
             return false;
         }

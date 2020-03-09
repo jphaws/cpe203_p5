@@ -15,7 +15,7 @@ public abstract class AbstractMoveableEntity extends AbstractAnimatedEntity{
         super(id, position, images, actionPeriod, animationPeriod);
     }
     
-    protected abstract boolean moveTo(AbstractMoveableEntity octo, WorldModel world,
+    protected abstract boolean moveTo(AbstractMoveableEntity Entity, WorldModel world,
                                 AbstractEntity target, EventScheduler scheduler);
     
     

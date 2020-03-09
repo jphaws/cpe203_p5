@@ -119,12 +119,10 @@ public final class VirtualWorld
                break;
          }
          Point pt = new Point(player.getPosition().x + dx, player.getPosition().y + dy);
-         player.scheduleActions(scheduler, world, imageStore);
-
          player.setImageIndex(0);
+         player.scheduleActions(scheduler, world, imageStore);
          if(!world.isOccupied(pt)) {
             world.moveEntity(player, pt);
-//            player.setImageIndex(2);
          }
       }
       else if(key == ' '){

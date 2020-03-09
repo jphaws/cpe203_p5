@@ -34,10 +34,5 @@ quake images/quake6.bmp 255 255 255 0
 bubbles images/PNG/Tiles/lava.png
 seaGrass images/PNG/Particles/swirl_orange.png 255 255 255 0
 background_default images/none.bmp
-player images/wyvern1.bmp 255 255 255 0
-player images/wyvern2.bmp 255 255 255 0
-player images/wyvern4.bmp 255 255 255 0
-player images/wyvern5.bmp 255 255 255 0
-player images/wyvern6.bmp 255 255 255 0
-player images/wyvern7.bmp 255 255 255 0
-player images/wyvern8.bmp 255 255 255 0
+player images/player_forward.png 255 255 255 0
+ability images/axe_diamond_small.png 225 255 255 0

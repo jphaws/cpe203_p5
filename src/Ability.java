@@ -1,6 +1,7 @@
 import processing.core.PImage;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Ability extends AbstractMoveableEntity{
@@ -45,11 +46,10 @@ public class Ability extends AbstractMoveableEntity{
 
     @Override
     protected void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
-        Optional<AbstractEntity> AxeTarget = world.findNearest(this.getPosition(), AbstractOcto.class);
+        Optional<AbstractEntity> AxeTarget = world.findNearest(this.getPosition(), Obstacle.class);
         long nextPeriod = this.getActionPeriod();
 
-        if (AxeTarget.isPresent())
-        {
+
             Point tgtPos = AxeTarget.get().getPosition();
 
             if (moveTo(this, world, AxeTarget.get(), scheduler))
@@ -61,7 +61,7 @@ public class Ability extends AbstractMoveableEntity{
                 nextPeriod += this.getActionPeriod();
                 quake.scheduleActions(scheduler, world, imageStore);
             }
-        }
+
         scheduler.scheduleEvent(this,
                 Activity.createActivityAction(this, world, imageStore),
                 nextPeriod);

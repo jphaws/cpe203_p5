@@ -57,12 +57,12 @@ public class OctoNotFull extends AbstractOcto{
         return false;
     }
 
-    protected boolean moveTo(AbstractMoveableEntity octo, WorldModel world,
-                          AbstractEntity target, EventScheduler scheduler)
+    protected boolean moveTo(AbstractMoveableEntity Entity, WorldModel world,
+                             AbstractEntity target, EventScheduler scheduler)
     {
-        if (adjacent(octo.getPosition(), target.getPosition()))
+        if (adjacent(Entity.getPosition(), target.getPosition()))
         {
-            ((AbstractOcto)octo).setResourceCount(((AbstractOcto)octo).getResourceCount() + 1);
+            ((AbstractOcto) Entity).setResourceCount(((AbstractOcto) Entity).getResourceCount() + 1);
             world.removeEntity(target);
             scheduler.unscheduleAllEvents(target);
 
@@ -70,9 +70,9 @@ public class OctoNotFull extends AbstractOcto{
         }
         else
         {
-            Point nextPos = octo.nextPosition(world, target.getPosition());
+            Point nextPos = Entity.nextPosition(world, target.getPosition());
 
-            if (!octo.getPosition().equals(nextPos))
+            if (!Entity.getPosition().equals(nextPos))
             {
                 Optional<AbstractEntity> occupant = world.getOccupant(nextPos);
                 if (occupant.isPresent())
@@ -80,7 +80,7 @@ public class OctoNotFull extends AbstractOcto{
                     scheduler.unscheduleAllEvents(occupant.get());
                 }
 
-                world.moveEntity(octo, nextPos);
+                world.moveEntity(Entity, nextPos);
             }
             return false;
         }

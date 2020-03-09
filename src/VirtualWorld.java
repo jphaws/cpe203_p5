@@ -68,11 +68,12 @@ public final class VirtualWorld
       this.view = new WorldView(VIEW_ROWS, VIEW_COLS, this, world,
          TILE_WIDTH, TILE_HEIGHT);
       this.scheduler = new EventScheduler(timeScale);
-      this.player = new Player("player", new Point(5, 5), 5, 5, imageStore.getImageList("player"));
-      world.addEntity(player);
 
       loadImages(IMAGE_LIST_FILE_NAME, imageStore, this);
       loadWorld(world, LOAD_FILE_NAME, imageStore);
+
+      this.player = new Player("player", new Point(5, 5), 5, 5, imageStore.getImageList("player"));
+      world.addEntity(player);
 
       scheduleActions(world, scheduler, imageStore);
 
@@ -117,7 +118,7 @@ public final class VirtualWorld
 
       }
       else if(key == ' '){
-         //Make new shooting object
+         player.useWeapon(world, imageStore, scheduler);
       }
    }
 

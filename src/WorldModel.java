@@ -16,6 +16,15 @@ final class WorldModel {
 
    private static final int FISH_REACH = 1;
 
+   private static final String PLAYER_KEY = "player";
+   private static final int PLAYER_NUM_PROPERTIES = 7;
+   private static final int PLAYER_ID = 1;
+   private static final int PLAYER_COL = 2;
+   private static final int PLAYER_ROW = 3;
+   private static final int PLAYER_LIMIT = 1;
+   private static final int PLAYER_ACTION_PERIOD = 5;
+   private static final int PLAYER_ANIMATION_PERIOD = 6;
+
    private static final String OCTO_KEY = "octo";
    private static final int OCTO_NUM_PROPERTIES = 7;
    private static final int OCTO_ID = 1;
@@ -262,6 +271,20 @@ final class WorldModel {
       return nearestEntity(ofType, pos);
    }
 
+   private boolean parsePlayer(String [] properties, ImageStore imageStore) {
+      if (properties.length == PLAYER_NUM_PROPERTIES) {
+         Point pt = new Point(Integer.parseInt(properties[PLAYER_COL]),
+                 Integer.parseInt(properties[PLAYER_ROW]));
+
+         Player player = new Player(properties[PLAYER_ID],
+                 pt,
+                 Integer.parseInt(properties[PLAYER_ACTION_PERIOD]),
+                 Integer.parseInt(properties[PLAYER_ANIMATION_PERIOD]),
+                 imageStore.getImageList(PLAYER_KEY));
+      }
+      return properties.length == PLAYER_NUM_PROPERTIES;
+   }
+
    private boolean parseBackground(String [] properties, ImageStore imageStore)
    {
       if (properties.length == BGND_NUM_PROPERTIES)
@@ -293,6 +316,7 @@ final class WorldModel {
 
       return properties.length == OCTO_NUM_PROPERTIES;
    }
+
 
    private boolean parseObstacle(String [] properties, ImageStore imageStore)
    {
@@ -373,6 +397,8 @@ final class WorldModel {
                return parseAtlantis(properties, imageStore);
             case SGRASS_KEY:
                return parseSgrass(properties, imageStore);
+            case PLAYER_KEY:
+               return parsePlayer(properties, imageStore);
          }
       }
 

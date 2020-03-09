@@ -40,7 +40,6 @@ public class Crab extends AbstractMoveableEntity{
                 quake.scheduleActions(scheduler, world, imageStore);
             }
         }
-
         scheduler.scheduleEvent(this,
                 Activity.createActivityAction(this, world, imageStore),
                 nextPeriod);

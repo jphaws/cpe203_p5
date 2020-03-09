@@ -48,7 +48,7 @@ public final class VirtualWorld
    private WorldModel world;
    private WorldView view;
    private EventScheduler scheduler;
-
+   private Player player;
    private long next_time;
 
    public void settings()
@@ -68,6 +68,8 @@ public final class VirtualWorld
       this.view = new WorldView(VIEW_ROWS, VIEW_COLS, this, world,
          TILE_WIDTH, TILE_HEIGHT);
       this.scheduler = new EventScheduler(timeScale);
+      this.player = new Player("player", new Point(5, 5), 5, 5, imageStore.getImageList("player"));
+      world.addEntity(player);
 
       loadImages(IMAGE_LIST_FILE_NAME, imageStore, this);
       loadWorld(world, LOAD_FILE_NAME, imageStore);
@@ -111,7 +113,11 @@ public final class VirtualWorld
                dx = 1;
                break;
          }
-         view.shiftView(dx, dy);
+         player.move(dx, dy, world);
+
+      }
+      else if(key == ' '){
+         //Make new shooting object
       }
    }
 

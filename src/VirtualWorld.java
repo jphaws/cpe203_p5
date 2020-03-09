@@ -33,7 +33,7 @@ public final class VirtualWorld
    private static final String DEFAULT_IMAGE_NAME = "background_default";
    private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-   private static final String LOAD_FILE_NAME = "world.sav";
+   private static final String LOAD_FILE_NAME = "world2.sav";
 
    private static final String FAST_FLAG = "-fast";
    private static final String FASTER_FLAG = "-faster";
@@ -72,7 +72,7 @@ public final class VirtualWorld
       loadImages(IMAGE_LIST_FILE_NAME, imageStore, this);
       loadWorld(world, LOAD_FILE_NAME, imageStore);
 
-      this.player = new Player("player", new Point(5, 5), 5, 5, imageStore.getImageList("player"));
+      this.player = new Player("player", new Point(5, 5), 5, 100, imageStore.getImageList("player"));
       world.addEntity(player);
 
       scheduleActions(world, scheduler, imageStore);
@@ -103,19 +103,29 @@ public final class VirtualWorld
          {
             case UP:
                dy = -1;
+               player.turn(1);
                break;
             case DOWN:
                dy = 1;
+               player.turn(0);
                break;
             case LEFT:
                dx = -1;
+               player.turn(2);
                break;
             case RIGHT:
                dx = 1;
+               player.turn(3);
                break;
          }
+         Point pt = new Point(player.getPosition().x + dx, player.getPosition().y + dy);
          player.scheduleActions(scheduler, world, imageStore);
-         world.moveEntity(player, new Point(player.getPosition().x + dx, player.getPosition().y + dy));
+
+         player.setImageIndex(0);
+         if(!world.isOccupied(pt)) {
+            world.moveEntity(player, pt);
+//            player.setImageIndex(2);
+         }
       }
       else if(key == ' '){
          player.useWeapon(world, imageStore, scheduler);

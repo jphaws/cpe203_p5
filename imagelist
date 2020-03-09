@@ -17,14 +17,14 @@ crab images/crabout09.bmp 255 255 255 128
 crab images/crabout10.bmp 255 255 255 128
 crab images/crabout11.bmp 255 255 255 128
 crab images/crabout11.bmp 255 255 255 128
-sea images/PNG/Tiles/gravel_stone.png 255 255 255 0
+sea images/PNG/Tiles/gravel_stone_small.png 255 255 255 0
 octo images/s1.bmp 255 255 255 0
 octo images/s2.bmp 255 255 255 0
 octo images/s3.bmp 255 255 255 0
 octo images/s4.bmp 255 255 255 0
 octo images/s5.bmp 255 255 255 0
-obstacle images/rock.bmp
-fish images/fish.bmp 255 255 255 0
+obstacle images/PNG/Tiles/brick_grey_small.png
+fish images/PNG/Items/ore_gold_small.png 255 255 255 0
 quake images/quake1.bmp 255 255 255 0
 quake images/quake2.bmp 255 255 255 0
 quake images/quake3.bmp 255 255 255 0
@@ -32,12 +32,10 @@ quake images/quake4.bmp 255 255 255 0
 quake images/quake5.bmp 255 255 255 0
 quake images/quake6.bmp 255 255 255 0
 bubbles images/PNG/Tiles/lava.png
-seaGrass images/PNG/Particles/swirl_orange.png 255 255 255 0
+seaGrass images/PNG/Tiles/oven_small.png 255 255 255 0
 background_default images/none.bmp
-player images/wyvern1.bmp 255 255 255 0
-player images/wyvern2.bmp 255 255 255 0
-player images/wyvern4.bmp 255 255 255 0
-player images/wyvern5.bmp 255 255 255 0
-player images/wyvern6.bmp 255 255 255 0
-player images/wyvern7.bmp 255 255 255 0
-player images/wyvern8.bmp 255 255 255 0
+player images/player_down.png 255 255 255 0
+player images/player_up.png 55 255 255 0
+player images/player_left.png 255 255 255 0
+player images/player_right.png 255 255 255 0
+ability images/axe_diamond_small.png 255 255 255 0

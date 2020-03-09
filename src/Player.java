@@ -1,5 +1,6 @@
 import processing.core.PImage;
 
+import javax.swing.*;
 import java.awt.image.PixelInterleavedSampleModel;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,12 +17,6 @@ public class Player extends AbstractAnimatedEntity{
     public Player(String id, Point position,int actionPeriod, int animationPeriod, List<PImage> images) {
         super(id, position, images, actionPeriod, animationPeriod);
     }
-    public void move(int dx, int dy, WorldModel world){
-        Point newP = new Point(getPosition().x + dx, getPosition().y + dy);
-        if(!world.isOccupied(newP) && world.withinBounds(newP)){
-            setPosition(newP);
-        }
-    }
 
     @Override
     protected void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
@@ -36,8 +31,17 @@ public class Player extends AbstractAnimatedEntity{
                 this.getAnimationPeriod());
     }
     public void useWeapon(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
-        Point p = new Point(this.getPosition().x+1, this.getPosition().y);
-        Ability f = new Ability("ability", p, imageStore.getImageList("ability"),  2, 5);
+        Point p;
+        if(direction == 0) {
+            p = new Point(this.getPosition().x, this.getPosition().y + 1);
+        } else if(direction == 1) {
+            p = new Point(this.getPosition().x, this.getPosition().y - 1);
+        } else if(direction == 2) {
+            p = new Point(this.getPosition().x - 1, this.getPosition().y);
+        } else
+            p = new Point(this.getPosition().x + 1, this.getPosition().y);
+
+        Ability f = new Ability("ability", p, imageStore.getImageList("ability"),  2, 5, this);
         world.addEntity(f);
         f.scheduleActions(scheduler, world, imageStore);
     }

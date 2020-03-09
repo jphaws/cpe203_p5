@@ -23,7 +23,7 @@ public class OctoFull extends AbstractOcto{
                                         ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<AbstractEntity> fullTarget = world.findNearest(this.getPosition(),
-                Atlantis.class);
+                Player.class);
 
         if (fullTarget.isPresent() &&
                 moveTo(this, world, fullTarget.get(), scheduler))

@@ -23,7 +23,7 @@ public class Crab extends AbstractMoveableEntity{
     public void executeActivity(WorldModel world,
                                     ImageStore imageStore, EventScheduler scheduler)
     {
-        Optional<AbstractEntity> crabTarget = world.findNearest(this.getPosition(), SGrass.class);
+        Optional<AbstractEntity> crabTarget = world.findNearest(this.getPosition(), Player.class);
         long nextPeriod = this.getActionPeriod();
 
         if (crabTarget.isPresent())

@@ -33,7 +33,7 @@ public final class VirtualWorld
    private static final String DEFAULT_IMAGE_NAME = "background_default";
    private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-   private static final String LOAD_FILE_NAME = "world2.sav";
+   private static final String LOAD_FILE_NAME = "world.sav";
 
    private static final String FAST_FLAG = "-fast";
    private static final String FASTER_FLAG = "-faster";

@@ -2,6 +2,7 @@ import processing.core.PImage;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Queue;
 
 public class Ability extends AbstractMoveableEntity{
 
@@ -45,14 +46,15 @@ public class Ability extends AbstractMoveableEntity{
         if (world.getOccupant(nextPos).isPresent()){
             Optional<AbstractEntity> occupant = world.getOccupant(nextPos);
             AbstractEntity e = occupant.get();
-            if(e instanceof AbstractOcto){
+            if(e instanceof AbstractOcto || e instanceof Crab){
                 scheduler.unscheduleAllEvents(e);
                 world.removeEntity(e);
                 scheduler.unscheduleAllEvents(this);
                 world.removeEntity(this);
                 return true;
             }
-            else if (e instanceof Obstacle ||e instanceof Atlantis || e instanceof Crab || e instanceof SGrass){
+            else if (e instanceof Obstacle ||e instanceof Atlantis || e instanceof SGrass
+            || e instanceof Fish || e instanceof Quake || e instanceof Ability){
                 scheduler.unscheduleAllEvents(this);
                 world.removeEntity(this);
             }
@@ -74,11 +76,11 @@ public class Ability extends AbstractMoveableEntity{
 
     @Override
     protected void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
-        Optional<AbstractEntity> AxeTarget = world.findNearest(this.getPosition(), Obstacle.class);
+        Optional<AbstractEntity> AxeTarget = world.findNearest(this.getPosition(), AbstractMoveableEntity.class);
         long nextPeriod = this.getActionPeriod();
 
 
-            Point tgtPos = target;
+            Point tgtPos = AxeTarget.get().getPosition();
 
 
             if (moveTo(this, world, AxeTarget.get(), scheduler))

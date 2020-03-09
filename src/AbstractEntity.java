@@ -25,6 +25,9 @@ public abstract class AbstractEntity{
         return images;
     }
 
+    protected void setImages(List<PImage> images){
+        this.images=images;
+    }
 
     protected void setPosition(Point position) {
         this.position = position;

@@ -45,7 +45,7 @@ public class Ability extends AbstractMoveableEntity{
 
     @Override
     protected void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
-        Optional<AbstractEntity> AxeTarget = world.findNearest(this.getPosition(), AbstractOcto.class);
+        Optional<AbstractEntity> AxeTarget = world.findNearest(this.getPosition(), Obstacle.class);
         long nextPeriod = this.getActionPeriod();
 
         if (AxeTarget.isPresent())

@@ -114,8 +114,8 @@ public final class VirtualWorld
                dx = 1;
                break;
          }
-         player.move(dx, dy, world);
-
+         player.scheduleActions(scheduler, world, imageStore);
+         world.moveEntity(player, new Point(player.getPosition().x + dx, player.getPosition().y + dy));
       }
       else if(key == ' '){
          player.useWeapon(world, imageStore, scheduler);

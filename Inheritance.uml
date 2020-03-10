@@ -13,11 +13,11 @@
     <node x="2274.0" y="1658.0">EventScheduler</node>
     <node x="448.0" y="2590.0">EventComparator</node>
     <node x="442.0" y="1658.0">ImageStore</node>
-    <node x="860.0" y="1086.0">AbstractOcto</node>
-    <node x="1136.0" y="1097.0">Crab</node>
-    <node x="2201.25" y="576.0">Fish</node>
+    <node x="860.0" y="1086.0">AbstractMonsterFactory</node>
+    <node x="1136.0" y="1097.0">Skeleton</node>
+    <node x="2201.25" y="576.0">Gold</node>
     <node x="1889.75" y="831.0">Quake</node>
-    <node x="998.0" y="1319.0">OctoNotFull</node>
+    <node x="998.0" y="1319.0">GhostNotFull</node>
     <node x="681.0" y="2590.0">images</node>
     <node x="1792.25" y="587.0">SGrass</node>
     <node x="2634.0" y="1658.0">Background</node>
@@ -25,7 +25,7 @@
     <node x="904.0" y="1658.0">Viewport</node>
     <node x="856.0" y="2590.0">Functions</node>
     <node x="230.0" y="2590.0">Point</node>
-    <node x="457.0" y="1319.0">OctoFull</node>
+    <node x="457.0" y="1319.0">GhostFull</node>
     <node x="1472.75" y="864.0">Atlantis</node>
     <node x="2083.25" y="0.0">AbstractEntity</node>
     <node x="0.0" y="2590.0">Event</node>
@@ -50,13 +50,13 @@
       <point x="0.0" y="-69.5" />
       <point x="0.0" y="58.5" />
     </edge>
-    <edge source="OctoFull" target="AbstractOcto">
+    <edge source="GhostFull" target="AbstractMonsterFactory">
       <point x="0.0" y="-59.5" />
       <point x="717.5" y="1294.0" />
       <point x="924.0" y="1294.0" />
       <point x="-64.0" y="91.5" />
     </edge>
-    <edge source="Fish" target="AbstractActiveEntity">
+    <edge source="Gold" target="AbstractActiveEntity">
       <point x="0.0" y="-102.5" />
       <point x="2395.75" y="551.0" />
       <point x="2119.0833333333335" y="551.0" />
@@ -68,19 +68,19 @@
       <point x="1738.5833333333333" y="806.0" />
       <point x="67.33333333333326" y="58.5" />
     </edge>
-    <edge source="OctoNotFull" target="AbstractOcto">
+    <edge source="GhostNotFull" target="AbstractMonsterFactory">
       <point x="0.0" y="-59.5" />
       <point x="1258.5" y="1294.0" />
       <point x="1052.0" y="1294.0" />
       <point x="64.0" y="91.5" />
     </edge>
-    <edge source="AbstractOcto" target="AbstractMoveableEntity">
+    <edge source="AbstractMonsterFactory" target="AbstractMoveableEntity">
       <point x="0.0" y="-91.5" />
       <point x="988.0" y="1061.0" />
       <point x="1062.0" y="1061.0" />
       <point x="-130.25" y="59.5" />
     </edge>
-    <edge source="Crab" target="AbstractMoveableEntity">
+    <edge source="Skeleton" target="AbstractMoveableEntity">
       <point x="0.0" y="-80.5" />
       <point x="1396.5" y="1061.0" />
       <point x="1322.5" y="1061.0" />

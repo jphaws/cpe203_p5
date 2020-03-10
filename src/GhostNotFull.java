@@ -3,28 +3,20 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class OctoNotFull extends AbstractOcto{
+public class GhostNotFull extends AbstractMonsterFactory {
 
 
-    public OctoNotFull(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod,
-                       int resourceLimit, int resourceCount)
+    public GhostNotFull(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod,
+                        int resourceLimit, int resourceCount)
     {
-        super(id, position, images, actionPeriod, animationPeriod, resourceLimit, resourceCount);
+        super(id, position, images, actionPeriod, animationPeriod);
 
-    }
-
-    public static OctoNotFull createOctoNotFull(String id, int resourceLimit,
-                                           Point position, int actionPeriod, int animationPeriod,
-                                           List<PImage> images)
-    {
-        return new OctoNotFull(id, position, images, actionPeriod, animationPeriod,
-                                resourceLimit, 0);
     }
 
     public void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<AbstractEntity> notFullTarget = world.findNearest(this.getPosition(),
-                Fish.class);
+                Gold.class);
 
         if (!notFullTarget.isPresent() ||
                 !moveTo(this, world, notFullTarget.get(), scheduler) ||
@@ -41,7 +33,7 @@ public class OctoNotFull extends AbstractOcto{
     {
         if (this.getResourceCount() >= this.getResourceLimit())
         {
-            AbstractOcto octo = OctoFull.createOctoFull(this.getId(), this.getResourceLimit(),
+            AbstractMonsterFactory octo = GhostFull.createOctoFull(this.getId(), this.getResourceLimit(),
                     this.getPosition(), this.getActionPeriod(), this.getAnimationPeriod(),
                     this.getImages());
 
@@ -62,7 +54,7 @@ public class OctoNotFull extends AbstractOcto{
     {
         if (adjacent(Entity.getPosition(), target.getPosition()))
         {
-            ((AbstractOcto) Entity).setResourceCount(((AbstractOcto) Entity).getResourceCount() + 1);
+            ((AbstractMonsterFactory) Entity).setResourceCount(((AbstractMonsterFactory) Entity).getResourceCount() + 1);
             world.removeEntity(target);
             scheduler.unscheduleAllEvents(target);
 

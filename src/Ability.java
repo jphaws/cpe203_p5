@@ -2,7 +2,6 @@ import processing.core.PImage;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Queue;
 
 public class Ability extends AbstractMoveableEntity{
 
@@ -46,7 +45,7 @@ public class Ability extends AbstractMoveableEntity{
         if (world.getOccupant(nextPos).isPresent()){
             Optional<AbstractEntity> occupant = world.getOccupant(nextPos);
             AbstractEntity e = occupant.get();
-            if(e instanceof AbstractOcto || e instanceof Crab){
+            if(e instanceof AbstractMonsterFactory || e instanceof Skeleton){
                 scheduler.unscheduleAllEvents(e);
                 world.removeEntity(e);
                 scheduler.unscheduleAllEvents(this);
@@ -54,7 +53,7 @@ public class Ability extends AbstractMoveableEntity{
                 return true;
             }
             else if (e instanceof Obstacle ||e instanceof Atlantis || e instanceof SGrass
-            || e instanceof Fish || e instanceof Quake || e instanceof Ability){
+            || e instanceof Gold || e instanceof Quake || e instanceof Ability){
                 scheduler.unscheduleAllEvents(this);
                 world.removeEntity(this);
             }

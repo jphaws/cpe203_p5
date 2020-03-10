@@ -1,5 +1,4 @@
 import processing.core.PImage;
-
 import java.util.*;
 
 /*
@@ -25,14 +24,25 @@ final class WorldModel {
    private static final int PLAYER_ACTION_PERIOD = 5;
    private static final int PLAYER_ANIMATION_PERIOD = 6;
 
-   private static final String OCTO_KEY = "octo";
-   private static final int OCTO_NUM_PROPERTIES = 7;
-   private static final int OCTO_ID = 1;
-   private static final int OCTO_COL = 2;
-   private static final int OCTO_ROW = 3;
-   private static final int OCTO_LIMIT = 4;
-   private static final int OCTO_ACTION_PERIOD = 5;
-   private static final int OCTO_ANIMATION_PERIOD = 6;
+   private static final String GHOST_KEY = "octo";
+   private static final int GHOST_NUM_PROPERTIES = 7;
+   private static final int GHOST_ID = 1;
+   private static final int GHOST_COL = 2;
+   private static final int GHOST_ROW = 3;
+   private static final int GHOST_LIMIT = 4;
+   private static final int GHOST_ACTION_PERIOD = 5;
+   private static final int GHOST_ANIMATION_PERIOD = 6;
+
+   private static final String SKELETON_KEY = "skeleton";
+   private static final int SKELETON_NUM_PROPERTIES = 7;
+   private static final int SKELETON_ID = 1;
+   private static final int SKELETON_COL = 2;
+   private static final int SKELETON_ROW = 3;
+   private static final int SKELETON_ACTION_PERIOD = 4;
+   private static final int SKELETON_ANIMATION_PERIOD = 4;
+   private static final int SKELETON_PERIOD_SCALE = 4;
+   private static final int SKELETON_ANIMATION_MIN = 50;
+   private static final int SKELETON_ANIMATION_MAX = 150;
 
    private static final String OBSTACLE_KEY = "obstacle";
    private static final int OBSTACLE_NUM_PROPERTIES = 4;
@@ -67,6 +77,7 @@ final class WorldModel {
    private static final int BGND_ROW = 3;
 
    private static final int PROPERTY_KEY = 0;
+   Random rand = new Random();
 
 
 
@@ -280,7 +291,7 @@ final class WorldModel {
                  pt,
                  Integer.parseInt(properties[PLAYER_ACTION_PERIOD]),
                  Integer.parseInt(properties[PLAYER_ANIMATION_PERIOD]),
-                 imageStore.getImageList(PLAYER_KEY));
+                 imageStore.getImageList(PLAYER_KEY),0);
       }
       return properties.length == PLAYER_NUM_PROPERTIES;
    }
@@ -299,22 +310,39 @@ final class WorldModel {
       return properties.length == BGND_NUM_PROPERTIES;
    }
 
-   private boolean parseOcto(String [] properties, ImageStore imageStore)
+   private boolean parseGhost(String [] properties, ImageStore imageStore)
    {
-      if (properties.length == OCTO_NUM_PROPERTIES)
+      if (properties.length == GHOST_NUM_PROPERTIES)
       {
-         Point pt = new Point(Integer.parseInt(properties[OCTO_COL]),
-                 Integer.parseInt(properties[OCTO_ROW]));
-         AbstractEntity entity = OctoNotFull.createOctoNotFull(properties[OCTO_ID],
-                 Integer.parseInt(properties[OCTO_LIMIT]),
+         Point pt = new Point(Integer.parseInt(properties[GHOST_COL]),
+                 Integer.parseInt(properties[GHOST_ROW]));
+         AbstractEntity entity = new GhostNotFull(properties[GHOST_ID],
                  pt,
-                 Integer.parseInt(properties[OCTO_ACTION_PERIOD]),
-                 Integer.parseInt(properties[OCTO_ANIMATION_PERIOD]),
-                 imageStore.getImageList(OCTO_KEY));
+                 imageStore.getImageList(GHOST_KEY),
+                 Integer.parseInt(properties[GHOST_ACTION_PERIOD]),
+                 Integer.parseInt(properties[GHOST_ANIMATION_PERIOD]),
+                 Integer.parseInt(properties[GHOST_LIMIT]),0);
          tryAddEntity(entity);
       }
 
-      return properties.length == OCTO_NUM_PROPERTIES;
+      return properties.length == GHOST_NUM_PROPERTIES;
+   }
+
+   private boolean parseSkeleton(String [] properties, ImageStore imageStore)
+   {
+      if (properties.length == SKELETON_NUM_PROPERTIES)
+      {
+         Point pt = new Point(Integer.parseInt(properties[SKELETON_COL]),
+                 Integer.parseInt(properties[SKELETON_ROW]));
+         AbstractEntity entity = new Skeleton(properties[SKELETON_ID],
+                 pt,
+                 imageStore.getImageList(SKELETON_KEY),
+                 (Integer.parseInt(properties[SKELETON_ACTION_PERIOD]) / (SKELETON_PERIOD_SCALE)),
+                 (Integer.parseInt(properties[SKELETON_ANIMATION_PERIOD])) + rand.nextInt(SKELETON_ANIMATION_MAX - SKELETON_ANIMATION_MIN));
+         tryAddEntity(entity);
+      }
+
+      return properties.length == SKELETON_NUM_PROPERTIES;
    }
 
 
@@ -339,9 +367,8 @@ final class WorldModel {
       {
          Point pt = new Point(Integer.parseInt(properties[FISH_COL]),
                  Integer.parseInt(properties[FISH_ROW]));
-         AbstractEntity entity = Fish.createFish(properties[FISH_ID],
-                 pt, Integer.parseInt(properties[FISH_ACTION_PERIOD]),
-                 imageStore.getImageList(FISH_KEY));
+         AbstractEntity entity = new Gold(properties[FISH_ID],
+                 pt, imageStore.getImageList(FISH_KEY), Integer.parseInt(properties[FISH_ACTION_PERIOD]));
          tryAddEntity(entity);
       }
 
@@ -387,8 +414,8 @@ final class WorldModel {
          {
             case BGND_KEY:
                return parseBackground(properties, imageStore);
-            case OCTO_KEY:
-               return parseOcto(properties, imageStore);
+            case GHOST_KEY:
+               return parseGhost(properties, imageStore);
             case OBSTACLE_KEY:
                return parseObstacle(properties, imageStore);
             case FISH_KEY:
@@ -399,6 +426,8 @@ final class WorldModel {
                return parseSgrass(properties, imageStore);
             case PLAYER_KEY:
                return parsePlayer(properties, imageStore);
+            case SKELETON_KEY:
+               return parseSkeleton(properties,imageStore);
          }
       }
 

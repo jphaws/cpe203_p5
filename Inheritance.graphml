@@ -573,7 +573,7 @@
           <y:Geometry height="151.77652899561235" width="330.08953774552754" x="23.761974389307852" y="1390.784428254007"/>
           <y:Fill color="#00CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="34.3291015625" x="147.88021809151377" y="3.0">Fish<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="34.3291015625" x="147.88021809151377" y="3.0">Gold<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -586,7 +586,7 @@
 -CRAB_PERIOD_SCALE: int                      &lt;&lt;static&gt;&gt;
 -CRAB_ANIMATION_MIN: int                     &lt;&lt;static&gt;&gt;
 -CRAB_ANIMATION_MAX: int                     &lt;&lt;static&gt;&gt;</y:AttributeLabel>
-            <y:MethodLabel>+createFish(): Fish                        &lt;&lt;static&gt;&gt;
+            <y:MethodLabel>+createFish(): Gold                        &lt;&lt;static&gt;&gt;
 +executeActivity() </y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
@@ -720,7 +720,7 @@
           <y:Geometry height="372.85447983197605" width="308.42754917409854" x="1396.9395213173302" y="1036.3158947506247"/>
           <y:Fill color="#00CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="38.02978515625" x="135.19888200892427" y="3.0">Crab<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="38.02978515625" x="135.19888200892427" y="3.0">Skeleton<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -729,7 +729,7 @@
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel>-QUAKE_KEY: String                           &lt;&lt;static&gt;&gt;</y:AttributeLabel>
-            <y:MethodLabel>-createCrab(): Crab                        &lt;&lt;static&gt;&gt;
+            <y:MethodLabel>-createCrab(): Skeleton                        &lt;&lt;static&gt;&gt;
 +executeActivity()   
 -moveTo(): boolean
 -nextPosition(): Point </y:MethodLabel>
@@ -744,7 +744,7 @@
           <y:Geometry height="122.03510063197632" width="318.2739076156571" x="1757.3964476614437" y="1028.0211994753267"/>
           <y:Fill color="#00CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="64.9501953125" x="126.66185615157855" y="3.0">OctoFull<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="64.9501953125" x="126.66185615157855" y="3.0">GhostFull<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -753,7 +753,7 @@
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel/>
-            <y:MethodLabel>+createOctoFull(): OctoFull                  &lt;&lt;static&gt;&gt;
+            <y:MethodLabel>+createOctoFull(): GhostFull                  &lt;&lt;static&gt;&gt;
 +executeActivity()
 -transformFull() 
 -moveTo(): boolean </y:MethodLabel>
@@ -768,7 +768,7 @@
           <y:Geometry height="110.13852928652182" width="318.2739076156571" x="2127.699732447116" y="1028.0211994753272"/>
           <y:Fill color="#00CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="90.9755859375" x="113.64916083907855" y="3.0">OctoNotFull<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="90.9755859375" x="113.64916083907855" y="3.0">GhostNotFull<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -777,7 +777,7 @@
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel/>
-            <y:MethodLabel>+createOctoNotFull(): OctoNotFull                 &lt;&lt;static&gt;&gt;
+            <y:MethodLabel>+createOctoNotFull(): GhostNotFull                 &lt;&lt;static&gt;&gt;
 +executeActivity()
 -transformNotFull()
 -moveTo(): boolean</y:MethodLabel>
@@ -792,7 +792,7 @@
           <y:Geometry height="137.3516597831391" width="410.21076300712355" x="1852.4774523316303" y="754.5338444779264"/>
           <y:Fill color="#6693FF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="100.32568359375" x="154.94253970668677" y="25.96875">AbstractOcto<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="100.32568359375" x="154.94253970668677" y="25.96875">AbstractMonsterFactory<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>

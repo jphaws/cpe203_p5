@@ -3,19 +3,19 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class OctoFull extends AbstractOcto{
+public class GhostFull extends AbstractMonsterFactory {
 
-    public OctoFull(String id, Point position,
-                  List<PImage> images, int actionPeriod, int animationPeriod, int resourceLimit, int resourceCount)
+    public GhostFull(String id, Point position,
+                     List<PImage> images, int actionPeriod, int animationPeriod, int resourceLimit, int resourceCount)
     {
-        super(id, position, images, actionPeriod, animationPeriod, resourceLimit, resourceCount);
+        super(id, position, images, actionPeriod, animationPeriod);
     }
 
-    public static OctoFull createOctoFull(String id, int resourceLimit,
-                                         Point position, int actionPeriod, int animationPeriod,
-                                         List<PImage> images)
+    public static GhostFull createOctoFull(String id, int resourceLimit,
+                                           Point position, int actionPeriod, int animationPeriod,
+                                           List<PImage> images)
     {
-        return new OctoFull(id, position, images, actionPeriod, animationPeriod,
+        return new GhostFull(id, position, images, actionPeriod, animationPeriod,
                 resourceLimit, resourceLimit);
     }
 
@@ -23,7 +23,7 @@ public class OctoFull extends AbstractOcto{
                                         ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<AbstractEntity> fullTarget = world.findNearest(this.getPosition(),
-                Player.class);
+                Atlantis.class);
 
         if (fullTarget.isPresent() &&
                 moveTo(this, world, fullTarget.get(), scheduler))
@@ -46,15 +46,15 @@ public class OctoFull extends AbstractOcto{
     private void transformFull(WorldModel world,
                                EventScheduler scheduler, ImageStore imageStore)
     {
-        AbstractMoveableEntity octo = OctoNotFull.createOctoNotFull(this.getId(), this.getResourceLimit(),
-                this.getPosition(), this.getActionPeriod(), this.getAnimationPeriod(),
-                this.getImages());
+        AbstractMoveableEntity Ghost = new GhostNotFull(this.getId(),
+                this.getPosition(), this.getImages(), this.getActionPeriod(),
+                this.getAnimationPeriod(),this.getResourceLimit(), 0);
 
         world.removeEntity(this);
         scheduler.unscheduleAllEvents(this);
 
-        world.addEntity(octo);
-        octo.scheduleActions(scheduler, world, imageStore);
+        world.addEntity(Ghost);
+        Ghost.scheduleActions(scheduler, world, imageStore);
     }
 
     public boolean moveTo(AbstractMoveableEntity Entity, WorldModel world,

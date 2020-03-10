@@ -3,34 +3,28 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class Crab extends AbstractMoveableEntity{
+public class Skeleton extends AbstractMonsterFactory{
 
 
     private static final String QUAKE_KEY = "quake";
 
-    public Crab(String id, Point position,
-                  List<PImage> images, int actionPeriod, int animationPeriod)
+    public Skeleton(String id, Point position,
+                    List<PImage> images, int actionPeriod, int animationPeriod)
     {
         super(id, position, images, actionPeriod, animationPeriod);
-    }
-
-    public static Crab createCrab(String id, Point position,
-                                     int actionPeriod, int animationPeriod, List<PImage> images)
-    {
-        return new Crab(id, position, images, actionPeriod, animationPeriod);
     }
 
     public void executeActivity(WorldModel world,
                                     ImageStore imageStore, EventScheduler scheduler)
     {
-        Optional<AbstractEntity> crabTarget = world.findNearest(this.getPosition(), Player.class);
+        Optional<AbstractEntity> skeletonTarget = world.findNearest(this.getPosition(), Player.class);
         long nextPeriod = this.getActionPeriod();
 
-        if (crabTarget.isPresent())
+        if (skeletonTarget.isPresent())
         {
-            Point tgtPos = crabTarget.get().getPosition();
+            Point tgtPos = skeletonTarget.get().getPosition();
 
-            if (moveTo(this, world, crabTarget.get(), scheduler))
+            if (moveTo(this, world, skeletonTarget.get(), scheduler))
             {
                 Quake quake = Quake.createQuake(tgtPos,
                         imageStore.getImageList(QUAKE_KEY));

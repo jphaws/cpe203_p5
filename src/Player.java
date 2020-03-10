@@ -12,10 +12,12 @@ public class Player extends AbstractAnimatedEntity{
         2 = left
         3 = right
      */
+    private int goldCount = 0;
     private List<PImage> fullList = super.getImages();
 
-    public Player(String id, Point position,int actionPeriod, int animationPeriod, List<PImage> images) {
+    public Player(String id, Point position,int actionPeriod, int animationPeriod, List<PImage> images, int goldCount) {
         super(id, position, images, actionPeriod, animationPeriod);
+        this.goldCount = goldCount;
     }
 
     @Override

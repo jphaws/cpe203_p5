@@ -72,7 +72,7 @@ public final class VirtualWorld
       loadImages(IMAGE_LIST_FILE_NAME, imageStore, this);
       loadWorld(world, LOAD_FILE_NAME, imageStore);
 
-      this.player = new Player("player", new Point(5, 5), 5, 100, imageStore.getImageList("player"));
+      this.player = new Player("player", new Point(5, 5), 5, 100, imageStore.getImageList("player"),0);
       world.addEntity(player);
 
       scheduleActions(world, scheduler, imageStore);

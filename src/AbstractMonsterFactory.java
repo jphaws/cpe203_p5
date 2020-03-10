@@ -2,13 +2,12 @@ import processing.core.PImage;
 
 import java.util.List;
 
-public abstract class AbstractOcto extends AbstractMoveableEntity {
+public abstract class AbstractMonsterFactory extends AbstractMoveableEntity {
 
     private int resourceLimit;
-    private int resourceCount;  //Only used by the octos
+    private int resourceCount;
 
-    public AbstractOcto(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod,
-                        int resourceLimit, int resourceCount)
+    public AbstractMonsterFactory(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod)
     {
         super(id, position, images, actionPeriod, animationPeriod);
         this.resourceLimit = resourceLimit;

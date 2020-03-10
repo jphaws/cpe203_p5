@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 import processing.core.*;
 
 /*
@@ -11,12 +12,12 @@ current view (think virtual camera) into that world (WorldView)
  */
 
 public final class VirtualWorld
-   extends PApplet {
-   private static final int TIMER_ACTION_PERIOD = 100;
+        extends PApplet {
+    private static final int TIMER_ACTION_PERIOD = 100;
 
-   private static final int VIEW_WIDTH = 1280;
-   private static final int VIEW_HEIGHT = 960;
-   //   private static final int VIEW_WIDTH = 640;
+    private static final int VIEW_WIDTH = 1280;
+    private static final int VIEW_HEIGHT = 960;
+    //   private static final int VIEW_WIDTH = 640;
 //   private static final int VIEW_HEIGHT = 480;
     private static final int TILE_WIDTH = 32;
     private static final int TILE_HEIGHT = 32;
@@ -32,7 +33,7 @@ public final class VirtualWorld
     private static final String DEFAULT_IMAGE_NAME = "background_default";
     private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-   private String LOAD_FILE_NAME = "start.sav";
+    private String LOAD_FILE_NAME = "start.sav";
 
     private static final String FAST_FLAG = "-fast";
     private static final String FASTER_FLAG = "-faster";
@@ -41,11 +42,11 @@ public final class VirtualWorld
     private static final double FASTER_SCALE = 0.25;
     private static final double FASTEST_SCALE = 0.10;
 
-   private static double timeScale = 1.0;
-   private String devMode = "";
-   private boolean devModeLock = true;
-   private int levelNumber = -1;
-   private boolean levelCompleted = false;
+    private static double timeScale = 1.0;
+    private String devMode = "";
+    private boolean devModeLock = true;
+    private int levelNumber = -1;
+    private boolean levelCompleted = false;
 
     private ImageStore imageStore;
     private WorldModel world;
@@ -54,21 +55,21 @@ public final class VirtualWorld
     private Player player;
     private long next_time;
 
-   public void settings() {
-      size(VIEW_WIDTH, VIEW_HEIGHT);
-   }
+    public void settings() {
+        size(VIEW_WIDTH, VIEW_HEIGHT);
+    }
 
-   /*
-      Processing entry point for "sketch" setup.
-   */
-   public void setup() {
-      this.imageStore = new ImageStore(
-              createImageColored(TILE_WIDTH, TILE_HEIGHT, DEFAULT_IMAGE_COLOR));
-      this.world = new WorldModel(WORLD_ROWS, WORLD_COLS,
-              createDefaultBackground(imageStore));
-      this.view = new WorldView(VIEW_ROWS, VIEW_COLS, this, world,
-              TILE_WIDTH, TILE_HEIGHT);
-      this.scheduler = new EventScheduler(timeScale);
+    /*
+       Processing entry point for "sketch" setup.
+    */
+    public void setup() {
+        this.imageStore = new ImageStore(
+                createImageColored(TILE_WIDTH, TILE_HEIGHT, DEFAULT_IMAGE_COLOR));
+        this.world = new WorldModel(WORLD_ROWS, WORLD_COLS,
+                createDefaultBackground(imageStore));
+        this.view = new WorldView(VIEW_ROWS, VIEW_COLS, this, world,
+                TILE_WIDTH, TILE_HEIGHT);
+        this.scheduler = new EventScheduler(timeScale);
 
         loadImages(IMAGE_LIST_FILE_NAME, imageStore, this);
         loadWorld(world, LOAD_FILE_NAME, imageStore);
@@ -81,35 +82,35 @@ public final class VirtualWorld
         next_time = System.currentTimeMillis() + TIMER_ACTION_PERIOD;
     }
 
-   public void draw() {
-      if (levelCompleted) {
-         switch (levelNumber) {
-            case -1:
-               LOAD_FILE_NAME = "start.sav";
-               setup();
-               break;
-            case 0:
-               LOAD_FILE_NAME = "world.sav";
-               setup();
-               break;
-            case 1:
-               LOAD_FILE_NAME = "world2.sav";
-               setup();
-               break;
-            case 2:
-               LOAD_FILE_NAME = "world3.sav";
-               setup();
-               break;
-         }
-         levelCompleted = false;
-      }
-      long time = System.currentTimeMillis();
-      if (time >= next_time) {
-         this.scheduler.updateOnTime(time);
-         next_time = time + TIMER_ACTION_PERIOD;
-      }
-      view.drawViewport();
-   }
+    public void draw() {
+        if (levelCompleted) {
+            switch (levelNumber) {
+                case -1:
+                    LOAD_FILE_NAME = "start.sav";
+                    setup();
+                    break;
+                case 0:
+                    LOAD_FILE_NAME = "world.sav";
+                    setup();
+                    break;
+                case 1:
+                    LOAD_FILE_NAME = "world2.sav";
+                    setup();
+                    break;
+                case 2:
+                    LOAD_FILE_NAME = "world3.sav";
+                    setup();
+                    break;
+            }
+            levelCompleted = false;
+        }
+        long time = System.currentTimeMillis();
+        if (time >= next_time) {
+            this.scheduler.updateOnTime(time);
+            next_time = time + TIMER_ACTION_PERIOD;
+        }
+        view.drawViewport();
+    }
 
     public void keyPressed() {
         if (key == CODED) {
@@ -140,80 +141,85 @@ public final class VirtualWorld
             if (!world.isOccupied(pt)) {
                 world.moveEntity(player, pt);
 //            view.shiftView(dx, dy);
-         }
-      }
-      if(key == ' '){
+            }
+            else if (world.getOccupancyCell(pt) instanceof Gold) {
+                world.removeEntity(world.getOccupancyCell(pt));
+                world.moveEntity(player, pt);
+                player.increaseGoldCount();
+                System.out.println(player.getGoldCount());
+            }
+        }
+        if (key == ' ') {
             player.useWeapon(world, imageStore, scheduler);
-      }
+        }
 
-      if(key == ENTER || key == RETURN) {
-         if (levelNumber == -1) {
-            levelCompleted = true;
-            levelNumber++;
-         }
-      }
-         if(key == '~'){
-          devModeLock = false;
-      }
-      if(!devModeLock){
-         switch (key) {
-            case 'o':
-               devMode = "o";       //activate obstacle edit mode
-               break;
-            case 'a':
-               devMode = "a";       //activate atlantis edit mode
-               break;
-            case 's':
-               devMode = "s";      //activate skeleton edit mode
-               break;
-            case 'g':
-               devMode = "g";       //activate gold edit mode
-               break;
-            case 'd':
-               devMode = "d";       //activate ghost/demon edit mode
-               break;
-            case 'l':
-               for (AbstractEntity e : world.getEntities()) {     //print list of all currently generated entities
-                  if (!(e instanceof Player)) {
-                     System.out.println(e);
-                  }
-               }
-               break;
-         }
-      }
-   }
+        if (key == ENTER || key == RETURN) {
+            if (levelNumber == -1) {
+                levelCompleted = true;
+                levelNumber++;
+            }
+        }
+        if (key == '~') {
+            devModeLock = false;
+        }
+        if (!devModeLock) {
+            switch (key) {
+                case 'o':
+                    devMode = "o";       //activate obstacle edit mode
+                    break;
+                case 'a':
+                    devMode = "a";       //activate atlantis edit mode
+                    break;
+                case 's':
+                    devMode = "s";      //activate skeleton edit mode
+                    break;
+                case 'g':
+                    devMode = "g";       //activate gold edit mode
+                    break;
+                case 'd':
+                    devMode = "d";       //activate ghost/demon edit mode
+                    break;
+                case 'l':
+                    for (AbstractEntity e : world.getEntities()) {     //print list of all currently generated entities
+                        if (!(e instanceof Player)) {
+                            System.out.println(e);
+                        }
+                    }
+                    break;
+            }
+        }
+    }
 
-    public void mousePressed()
-    {
+    public void mousePressed() {
         Point pressed = mouseToPoint(mouseX, mouseY);
         System.out.println("(" + pressed.x + ", " + pressed.y + ")");
 
-        switch(devMode){
+        switch (devMode) {
             case "o":
                 if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Obstacle)
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
-                else{
+                else {
                     world.addEntity(new Obstacle("obstacle", new Point(pressed.x, pressed.y), imageStore.getImageList("obstacle")));
                 }
                 break;
             case "a":
                 if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Atlantis)
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
-                else{
+                else {
                     world.addEntity(new Atlantis("atlantis", new Point(pressed.x, pressed.y), imageStore.getImageList("atlantis"), 0, 0));
                 }
                 break;
             case "s":
                 if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Skeleton)
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
-                else{
+                else {
                     world.addEntity(new Skeleton("skeleton", new Point(pressed.x, pressed.y), imageStore.getImageList("skeleton"), 900, 100));
                 }
                 break;
             case "g":
                 if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Gold)
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
-                else{
+                else {
                     world.addEntity(new Gold("gold", new Point(pressed.x, pressed.y), imageStore.getImageList("gold"), 100));
                 }
                 break;
@@ -222,24 +228,21 @@ public final class VirtualWorld
         redraw();
 
     }
-    private Point mouseToPoint(int x, int y)
-    {
-        return new Point(mouseX/32, mouseY/32);
+
+    private Point mouseToPoint(int x, int y) {
+        return new Point(mouseX / 32, mouseY / 32);
     }
 
 
-    public static Background createDefaultBackground(ImageStore imageStore)
-    {
+    public static Background createDefaultBackground(ImageStore imageStore) {
         return new Background(DEFAULT_IMAGE_NAME,
                 imageStore.getImageList(DEFAULT_IMAGE_NAME));
     }
 
-    public static PImage createImageColored(int width, int height, int color)
-    {
+    public static PImage createImageColored(int width, int height, int color) {
         PImage img = new PImage(width, height, RGB);
         img.loadPixels();
-        for (int i = 0; i < img.pixels.length; i++)
-        {
+        for (int i = 0; i < img.pixels.length; i++) {
             img.pixels[i] = color;
         }
         img.updatePixels();
@@ -247,50 +250,37 @@ public final class VirtualWorld
     }
 
     private static void loadImages(String filename, ImageStore imageStore,
-                                   PApplet screen)
-    {
-        try
-        {
+                                   PApplet screen) {
+        try {
             Scanner in = new Scanner(new File(filename));
             imageStore.loadImages(in, screen);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
     }
 
     public static void loadWorld(WorldModel world, String filename,
-                                 ImageStore imageStore)
-    {
-        try
-        {
+                                 ImageStore imageStore) {
+        try {
             Scanner in = new Scanner(new File(filename));
             world.load(in, imageStore);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
     }
 
     public static void scheduleActions(WorldModel world,
-                                       EventScheduler scheduler, ImageStore imageStore)
-    {
-        for (AbstractEntity entity : world.getEntities())
-        {
+                                       EventScheduler scheduler, ImageStore imageStore) {
+        for (AbstractEntity entity : world.getEntities()) {
             //Only start actions for entities that include action (not those with just animations)
             if (entity instanceof AbstractActiveEntity)  //entity instanceof Execuable
-                ((AbstractActiveEntity)entity).scheduleActions(scheduler, world, imageStore);
+                ((AbstractActiveEntity) entity).scheduleActions(scheduler, world, imageStore);
         }
     }
 
-    public static void parseCommandLine(String [] args)
-    {
-        for (String arg : args)
-        {
-            switch (arg)
-            {
+    public static void parseCommandLine(String[] args) {
+        for (String arg : args) {
+            switch (arg) {
                 case FAST_FLAG:
                     timeScale = Math.min(FAST_SCALE, timeScale);
                     break;
@@ -304,8 +294,7 @@ public final class VirtualWorld
         }
     }
 
-    public static void main(String [] args)
-    {
+    public static void main(String[] args) {
         parseCommandLine(args);
         PApplet.main(VirtualWorld.class);
     }

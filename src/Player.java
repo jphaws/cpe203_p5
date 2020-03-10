@@ -62,4 +62,9 @@ public class Player extends AbstractAnimatedEntity{
             return move;
     }
 
+    public void increaseGoldCount() {
+        goldCount++;
+    }
+    public int getGoldCount() {return goldCount;}
+
 }

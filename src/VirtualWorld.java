@@ -33,7 +33,7 @@ public final class VirtualWorld
    private static final String DEFAULT_IMAGE_NAME = "background_default";
    private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-   private static final String LOAD_FILE_NAME = "world.sav";
+   private static final String LOAD_FILE_NAME = "world3.sav";
 
    private static final String FAST_FLAG = "-fast";
    private static final String FASTER_FLAG = "-faster";
@@ -43,6 +43,7 @@ public final class VirtualWorld
    private static final double FASTEST_SCALE = 0.10;
 
    private static double timeScale = 1.0;
+   private String devMode = "o";
 
    private ImageStore imageStore;
    private WorldModel world;
@@ -72,7 +73,7 @@ public final class VirtualWorld
       loadImages(IMAGE_LIST_FILE_NAME, imageStore, this);
       loadWorld(world, LOAD_FILE_NAME, imageStore);
 
-      this.player = new Player("player", new Point(5, 5), 5, 100, imageStore.getImageList("player"),0);
+      this.player = new Player("player", new Point(5, 5), 5, 5, imageStore.getImageList("player"), 0);
       world.addEntity(player);
 
       scheduleActions(world, scheduler, imageStore);
@@ -89,7 +90,6 @@ public final class VirtualWorld
          next_time = time + TIMER_ACTION_PERIOD;
       }
       view.drawViewport();
-//      WorldView.drawViewport(view);
    }
 
    public void keyPressed()
@@ -123,12 +123,96 @@ public final class VirtualWorld
          player.scheduleActions(scheduler, world, imageStore);
          if(!world.isOccupied(pt)) {
             world.moveEntity(player, pt);
+//            view.shiftView(dx, dy);
          }
       }
-      else if(key == ' '){
-         player.useWeapon(world, imageStore, scheduler);
+      switch(key){
+         case ' ':
+            player.useWeapon(world, imageStore, scheduler);
+            break;
+         case 'o':
+            devMode = "o";       //activate obstacle edit mode
+            break;
+         case 'a':
+            devMode = "a";       //activate atlantis edit mode
+            break;
+         case 's':
+            devMode  = "s";      //activate skeleton edit mode
+            break;
+         case 'g':
+            devMode = "g";       //activate gold edit mode
+            break;
+         case 'd':
+            devMode = "d";       //activate ghost/demon edit mode
+            break;
+         case 'l':
+            for (AbstractEntity e : world.getEntities()) {     //print list of all currently generated entities
+               if (!(e instanceof Player)) {
+                  System.out.println(e);
+               }
+            }
+            break;
       }
+
+//      else if(key == ' '){
+//         player.useWeapon(world, imageStore, scheduler);
+//      }
+//      else if(key == 'l') {
+//         for (AbstractEntity e : world.getEntities()) {
+//            if (e instanceof Obstacle) {
+//               System.out.println(e);
+//            }
+//         }
+//      }
+//      else if(key == 'o'){
+//          devMode = "o";
+//      }
+//      else if()
    }
+
+   public void mousePressed()
+{
+   Point pressed = mouseToPoint(mouseX, mouseY);
+
+   switch(devMode){
+      case "o":
+         if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Obstacle)
+          world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
+         else{
+            world.addEntity(new Obstacle("obstacle", new Point(pressed.x, pressed.y), imageStore.getImageList("obstacle")));
+         }
+         break;
+      case "a":
+         if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Atlantis)
+            world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
+         else{
+            world.addEntity(new Atlantis("atlantis", new Point(pressed.x, pressed.y), imageStore.getImageList("atlantis"), 0, 0));
+         }
+         break;
+      case "s":
+         if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Skeleton)
+            world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
+         else{
+            world.addEntity(new Skeleton("skeleton", new Point(pressed.x, pressed.y), imageStore.getImageList("skeleton"), 900, 100));
+         }
+         break;
+      case "g":
+         if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Gold)
+            world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
+         else{
+            world.addEntity(new Gold("gold", new Point(pressed.x, pressed.y), imageStore.getImageList("gold"), 100));
+         }
+         break;
+   }
+
+   redraw();
+
+}
+   private Point mouseToPoint(int x, int y)
+   {
+      return new Point(mouseX/32, mouseY/32);
+   }
+
 
    public static Background createDefaultBackground(ImageStore imageStore)
    {

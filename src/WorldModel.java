@@ -141,7 +141,7 @@ final class WorldModel {
               pos.x >= 0 && pos.x < getNumCols();
    }
 
-   private AbstractEntity getOccupancyCell(Point pos)
+   public AbstractEntity getOccupancyCell(Point pos)
    {
       return occupancy[pos.y][pos.x];
    }

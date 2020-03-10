@@ -48,4 +48,8 @@ public abstract class AbstractEntity{
     protected String getId(){
         return id;
     }
+
+    public String toString(){
+        return id + " " + id + " " + position.x + " " + position.y;
+    }
 }

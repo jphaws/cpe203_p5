@@ -123,6 +123,12 @@ public final class VirtualWorld
             world.moveEntity(player, pt);
 //            view.shiftView(dx, dy);
          }
+         else if(world.getOccupancyCell(pt) instanceof Gold) {
+             world.removeEntity(world.getOccupancyCell(pt));
+             world.moveEntity(player, pt);
+             player.increaseGoldCount();
+             System.out.println(player.getGoldCount());
+         }
       }
       if(key == ' '){
             player.useWeapon(world, imageStore, scheduler);

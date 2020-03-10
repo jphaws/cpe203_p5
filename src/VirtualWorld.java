@@ -33,7 +33,7 @@ public final class VirtualWorld
    private static final String DEFAULT_IMAGE_NAME = "background_default";
    private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-   private static final String LOAD_FILE_NAME = "world3.sav";
+   private static final String LOAD_FILE_NAME = "world2.sav";
 
    private static final String FAST_FLAG = "-fast";
    private static final String FASTER_FLAG = "-faster";
@@ -124,13 +124,13 @@ public final class VirtualWorld
 //            view.shiftView(dx, dy);
          }
       }
+      if(key == ' '){
+            player.useWeapon(world, imageStore, scheduler);
+      }
       if(key == '~')
          devModeLock = false;
       if(!devModeLock){
          switch (key) {
-            case ' ':
-               player.useWeapon(world, imageStore, scheduler);
-               break;
             case 'o':
                devMode = "o";       //activate obstacle edit mode
                break;
@@ -160,6 +160,7 @@ public final class VirtualWorld
    public void mousePressed()
 {
    Point pressed = mouseToPoint(mouseX, mouseY);
+   System.out.println("(" + pressed.x + ", " + pressed.y + ")");
 
    switch(devMode){
       case "o":

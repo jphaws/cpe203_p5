@@ -50,7 +50,7 @@ final class WorldModel {
    private static final int OBSTACLE_COL = 2;
    private static final int OBSTACLE_ROW = 3;
 
-   private static final String FISH_KEY = "fish";
+   private static final String FISH_KEY = "gold";
    private static final int FISH_NUM_PROPERTIES = 5;
    private static final int FISH_ID = 1;
    private static final int FISH_COL = 2;

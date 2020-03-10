@@ -11,13 +11,12 @@ current view (think virtual camera) into that world (WorldView)
  */
 
 public final class VirtualWorld
-   extends PApplet
-{
+   extends PApplet {
    private static final int TIMER_ACTION_PERIOD = 100;
 
    private static final int VIEW_WIDTH = 1280;
    private static final int VIEW_HEIGHT = 960;
-//   private static final int VIEW_WIDTH = 640;
+   //   private static final int VIEW_WIDTH = 640;
 //   private static final int VIEW_HEIGHT = 480;
    private static final int TILE_WIDTH = 32;
    private static final int TILE_HEIGHT = 32;
@@ -33,7 +32,7 @@ public final class VirtualWorld
    private static final String DEFAULT_IMAGE_NAME = "background_default";
    private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-   private static final String LOAD_FILE_NAME = "world2.sav";
+   private String LOAD_FILE_NAME = "start.sav";
 
    private static final String FAST_FLAG = "-fast";
    private static final String FASTER_FLAG = "-faster";
@@ -45,6 +44,8 @@ public final class VirtualWorld
    private static double timeScale = 1.0;
    private String devMode = "";
    private boolean devModeLock = true;
+   private int levelNumber = -1;
+   private boolean levelCompleted = false;
 
    private ImageStore imageStore;
    private WorldModel world;
@@ -53,22 +54,20 @@ public final class VirtualWorld
    private Player player;
    private long next_time;
 
-   public void settings()
-   {
+   public void settings() {
       size(VIEW_WIDTH, VIEW_HEIGHT);
    }
 
    /*
       Processing entry point for "sketch" setup.
    */
-   public void setup()
-   {
+   public void setup() {
       this.imageStore = new ImageStore(
-         createImageColored(TILE_WIDTH, TILE_HEIGHT, DEFAULT_IMAGE_COLOR));
+              createImageColored(TILE_WIDTH, TILE_HEIGHT, DEFAULT_IMAGE_COLOR));
       this.world = new WorldModel(WORLD_ROWS, WORLD_COLS,
-         createDefaultBackground(imageStore));
+              createDefaultBackground(imageStore));
       this.view = new WorldView(VIEW_ROWS, VIEW_COLS, this, world,
-         TILE_WIDTH, TILE_HEIGHT);
+              TILE_WIDTH, TILE_HEIGHT);
       this.scheduler = new EventScheduler(timeScale);
 
       loadImages(IMAGE_LIST_FILE_NAME, imageStore, this);
@@ -82,11 +81,30 @@ public final class VirtualWorld
       next_time = System.currentTimeMillis() + TIMER_ACTION_PERIOD;
    }
 
-   public void draw()
-   {
+   public void draw() {
+      if (levelCompleted) {
+         switch (levelNumber) {
+            case -1:
+               LOAD_FILE_NAME = "start.sav";
+               setup();
+               break;
+            case 0:
+               LOAD_FILE_NAME = "world.sav";
+               setup();
+               break;
+            case 1:
+               LOAD_FILE_NAME = "world2.sav";
+               setup();
+               break;
+            case 2:
+               LOAD_FILE_NAME = "world3.sav";
+               setup();
+               break;
+         }
+         levelCompleted = false;
+      }
       long time = System.currentTimeMillis();
-      if (time >= next_time)
-      {
+      if (time >= next_time) {
          this.scheduler.updateOnTime(time);
          next_time = time + TIMER_ACTION_PERIOD;
       }
@@ -127,8 +145,16 @@ public final class VirtualWorld
       if(key == ' '){
             player.useWeapon(world, imageStore, scheduler);
       }
-      if(key == '~')
-         devModeLock = false;
+
+      if(key == ENTER || key == RETURN) {
+         if (levelNumber == -1) {
+            levelCompleted = true;
+            levelNumber++;
+         }
+      }
+         if(key == '~'){
+          devModeLock = false;
+      }
       if(!devModeLock){
          switch (key) {
             case 'o':

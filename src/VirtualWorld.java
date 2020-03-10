@@ -43,7 +43,8 @@ public final class VirtualWorld
    private static final double FASTEST_SCALE = 0.10;
 
    private static double timeScale = 1.0;
-   private String devMode = "o";
+   private String devMode = "";
+   private boolean devModeLock = true;
 
    private ImageStore imageStore;
    private WorldModel world;
@@ -92,15 +93,12 @@ public final class VirtualWorld
       view.drawViewport();
    }
 
-   public void keyPressed()
-   {
-      if (key == CODED)
-      {
+   public void keyPressed() {
+      if (key == CODED) {
          int dx = 0;
          int dy = 0;
 
-         switch (keyCode)
-         {
+         switch (keyCode) {
             case UP:
                dy = -1;
                player.turn(1);
@@ -121,53 +119,42 @@ public final class VirtualWorld
          Point pt = new Point(player.getPosition().x + dx, player.getPosition().y + dy);
          player.setImageIndex(0);
          player.scheduleActions(scheduler, world, imageStore);
-         if(!world.isOccupied(pt)) {
+         if (!world.isOccupied(pt)) {
             world.moveEntity(player, pt);
 //            view.shiftView(dx, dy);
          }
       }
-      switch(key){
-         case ' ':
-            player.useWeapon(world, imageStore, scheduler);
-            break;
-         case 'o':
-            devMode = "o";       //activate obstacle edit mode
-            break;
-         case 'a':
-            devMode = "a";       //activate atlantis edit mode
-            break;
-         case 's':
-            devMode  = "s";      //activate skeleton edit mode
-            break;
-         case 'g':
-            devMode = "g";       //activate gold edit mode
-            break;
-         case 'd':
-            devMode = "d";       //activate ghost/demon edit mode
-            break;
-         case 'l':
-            for (AbstractEntity e : world.getEntities()) {     //print list of all currently generated entities
-               if (!(e instanceof Player)) {
-                  System.out.println(e);
+      if(key == '~')
+         devModeLock = false;
+      if(!devModeLock){
+         switch (key) {
+            case ' ':
+               player.useWeapon(world, imageStore, scheduler);
+               break;
+            case 'o':
+               devMode = "o";       //activate obstacle edit mode
+               break;
+            case 'a':
+               devMode = "a";       //activate atlantis edit mode
+               break;
+            case 's':
+               devMode = "s";      //activate skeleton edit mode
+               break;
+            case 'g':
+               devMode = "g";       //activate gold edit mode
+               break;
+            case 'd':
+               devMode = "d";       //activate ghost/demon edit mode
+               break;
+            case 'l':
+               for (AbstractEntity e : world.getEntities()) {     //print list of all currently generated entities
+                  if (!(e instanceof Player)) {
+                     System.out.println(e);
+                  }
                }
-            }
-            break;
+               break;
+         }
       }
-
-//      else if(key == ' '){
-//         player.useWeapon(world, imageStore, scheduler);
-//      }
-//      else if(key == 'l') {
-//         for (AbstractEntity e : world.getEntities()) {
-//            if (e instanceof Obstacle) {
-//               System.out.println(e);
-//            }
-//         }
-//      }
-//      else if(key == 'o'){
-//          devMode = "o";
-//      }
-//      else if()
    }
 
    public void mousePressed()

@@ -123,7 +123,6 @@ public class Ability extends AbstractMoveableEntity {
         }
 
         if(isGHOST) {
-            System.out.println("Here");
             world.addEntity(ghost);
             ghost.scheduleActions(scheduler, world, imageStore);
             isGHOST = false;

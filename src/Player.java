@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.image.PixelInterleavedSampleModel;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class Player extends AbstractAnimatedEntity{
     private int direction = 0;
@@ -43,7 +44,12 @@ public class Player extends AbstractAnimatedEntity{
         } else
             p = new Point(this.getPosition().x + 1, this.getPosition().y);
 
-        if(!(world.getOccupancyCell(p) instanceof Obstacle)) {
+        if(world.getOccupancyCell(p) instanceof AbstractMonsterFactory) {
+            Optional<AbstractEntity> occupant = world.getOccupant(p);
+            AbstractEntity e = occupant.get();
+            world.removeEntity(e);
+        }
+        else if(!(world.getOccupancyCell(p) instanceof Obstacle)) {
             Ability f = new Ability("ability", p, imageStore.getImageList("ability"), 2, 5, this);
             world.addEntity(f);
             f.scheduleActions(scheduler, world, imageStore);

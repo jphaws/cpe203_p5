@@ -23,14 +23,14 @@ public class GhostFull extends AbstractMonsterFactory {
                                         ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<AbstractEntity> fullTarget = world.findNearest(this.getPosition(),
-                Atlantis.class);
+                Portal.class);
 
         if (fullTarget.isPresent() &&
                 moveTo(this, world, fullTarget.get(), scheduler))
         {
             //at atlantis trigger animation
-            if(fullTarget.get() instanceof Atlantis)
-                ((Atlantis)(fullTarget.get())).scheduleActions(scheduler, world, imageStore);
+            if(fullTarget.get() instanceof DerpPoly)
+                ((Portal)(fullTarget.get())).scheduleActions(scheduler, world, imageStore);
 
             //transform to unfull
             transformFull(world, scheduler, imageStore);

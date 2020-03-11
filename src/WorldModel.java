@@ -63,11 +63,13 @@ final class WorldModel {
    private static final int GOLD_ROW = 3;
    private static final int GOLD_ACTION_PERIOD = 4;
 
-   private static final String ATLANTIS_KEY = "atlantis";
-   private static final int ATLANTIS_NUM_PROPERTIES = 4;
-   private static final int ATLANTIS_ID = 1;
-   private static final int ATLANTIS_COL = 2;
-   private static final int ATLANTIS_ROW = 3;
+   private static final String PORTAL_KEY = "portal";
+   private static final int PORTAL_NUM_PROPERTIES = 4;
+   private static final int PORTAL_ID = 1;
+   private static final int PORTAL_COL = 2;
+   private static final int PORTAL_ROW = 3;
+   private static final String DERP_KEY = "derp";
+
 
    private static final String SGRASS_KEY = "seaGrass";
    private static final int SGRASS_NUM_PROPERTIES = 5;
@@ -409,18 +411,32 @@ final class WorldModel {
       return properties.length == GOLD_NUM_PROPERTIES;
    }
 
-   private boolean parseAtlantis(String [] properties, ImageStore imageStore)
+   private boolean parsePortal(String [] properties, ImageStore imageStore)
    {
-      if (properties.length == ATLANTIS_NUM_PROPERTIES)
+      if (properties.length == PORTAL_NUM_PROPERTIES)
       {
-         Point pt = new Point(Integer.parseInt(properties[ATLANTIS_COL]),
-                 Integer.parseInt(properties[ATLANTIS_ROW]));
-         AbstractEntity entity = Atlantis.createAtlantis(properties[ATLANTIS_ID],
-                 pt, imageStore.getImageList(ATLANTIS_KEY));
+         Point pt = new Point(Integer.parseInt(properties[PORTAL_COL]),
+                 Integer.parseInt(properties[PORTAL_ROW]));
+         AbstractEntity entity = new Portal(properties[PORTAL_ID],
+                 pt, imageStore.getImageList(PORTAL_KEY),0,0);
          tryAddEntity(entity);
       }
 
-      return properties.length == ATLANTIS_NUM_PROPERTIES;
+      return properties.length == PORTAL_NUM_PROPERTIES;
+   }
+
+   private boolean parseDerp(String [] properties, ImageStore imageStore)
+   {
+      if (properties.length == PORTAL_NUM_PROPERTIES)
+      {
+         Point pt = new Point(Integer.parseInt(properties[PORTAL_COL]),
+                 Integer.parseInt(properties[PORTAL_ROW]));
+         AbstractEntity entity = new Portal(properties[PORTAL_ID],
+                 pt, imageStore.getImageList(DERP_KEY),0,0);
+         tryAddEntity(entity);
+      }
+
+      return properties.length == PORTAL_NUM_PROPERTIES;
    }
 
    private boolean parseSgrass(String [] properties, ImageStore imageStore)
@@ -454,8 +470,8 @@ final class WorldModel {
                return parseObstacle(properties, imageStore);
             case GOLD_KEY:
                return parseGOLD(properties, imageStore);
-            case ATLANTIS_KEY:
-               return parseAtlantis(properties, imageStore);
+            case PORTAL_KEY:
+               return parsePortal(properties, imageStore);
             case SGRASS_KEY:
                return parseSgrass(properties, imageStore);
             case PLAYER_KEY:
@@ -464,6 +480,8 @@ final class WorldModel {
                return parseSkeleton(properties,imageStore);
             case TEMP_OBSTACLE_KEY:
                return parseTempObstacle(properties, imageStore);
+            case DERP_KEY:
+               return parseDerp(properties,imageStore);
          }
       }
 

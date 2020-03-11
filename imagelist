@@ -1,10 +1,8 @@
-atlantis images/calpoly.png 255 255 255 0
-atlantis images/atlantis1.bmp
-atlantis images/atlantis2.bmp 
-atlantis images/atlantis3.bmp 
-atlantis images/atlantis4.bmp 
-atlantis images/atlantis5.bmp
-atlantis images/atlantis6.bmp
+portal images/portal1.png 255 255 255 0
+portal images/portal2.png
+portal images/portal3.png
+portal images/portal4.png
+derp images/calpoly.png 255 255 255 0
 skeleton images/Skeleton.png 255 255 255 128
 skeleton images/Walk1.png 255 255 255 128
 skeleton images/Walk2.png 255 255 255 128

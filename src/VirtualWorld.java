@@ -17,8 +17,8 @@ public final class VirtualWorld
 
     private static final int VIEW_WIDTH = 1280;
     private static final int VIEW_HEIGHT = 960;
-    //   private static final int VIEW_WIDTH = 640;
-//   private static final int VIEW_HEIGHT = 480;
+//    private static final int VIEW_WIDTH = 640;
+//    private static final int VIEW_HEIGHT = 480;
     private static final int TILE_WIDTH = 32;
     private static final int TILE_HEIGHT = 32;
     private static final int WORLD_WIDTH_SCALE = 2;
@@ -143,7 +143,6 @@ public final class VirtualWorld
             player.scheduleActions(scheduler, world, imageStore);
             if (!world.isOccupied(pt)) {
                 world.moveEntity(player, pt);
-//            view.shiftView(dx, dy);
             }
             else if (world.getOccupancyCell(pt) instanceof Gold) {
                 world.removeEntity(world.getOccupancyCell(pt));
@@ -162,26 +161,24 @@ public final class VirtualWorld
                 levelNumber++;
             }
         }
+        int vx = 0;
+        int vy = 0;
         if(key == 'w') {
-            int vx = 0;
-            int vy = 0;
             vy -= 1;
-            view.shiftView(vx, vy);
+            WorldView v = view;
+            v.shiftView(vx, vy);
         } else if(key == 's') {
-            int vx = 0;
-            int vy = 0;
             vy += 1;
-            view.shiftView(vx, vy);
+            WorldView v = view;
+            v.shiftView(vx, vy);
         } else if(key == 'a'){
-            int vx = 0;
-            int vy = 0;
             vx -= 1;
-            view.shiftView(vx, vy);
+            WorldView v = view;
+            v.shiftView(vx, vy);
         } else if(key == 'd') {
-            int vx = 0;
-            int vy = 0;
             vx += 1;
-            view.shiftView(vx, vy);
+            WorldView v = view;
+            v.shiftView(vx, vy);
         }
 
         if (key == '~') {
@@ -227,11 +224,18 @@ public final class VirtualWorld
                     world.addEntity(new Obstacle("obstacle", new Point(pressed.x, pressed.y), imageStore.getImageList("obstacle")));
                 }
                 break;
-            case "a":
-                if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Atlantis)
+            case "p":
+                if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Portal)
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
                 else {
-                    world.addEntity(new Atlantis("atlantis", new Point(pressed.x, pressed.y), imageStore.getImageList("atlantis"), 0, 0));
+                    world.addEntity(new Portal("portal", new Point(pressed.x, pressed.y), imageStore.getImageList("atlantis"), 0, 0));
+                }
+                break;
+            case "d":
+                if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Portal)
+                    world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
+                else {
+                    world.addEntity(new DerpPoly("derp", new Point(pressed.x, pressed.y), imageStore.getImageList("atlantis"), 0, 0));
                 }
                 break;
             case "s":

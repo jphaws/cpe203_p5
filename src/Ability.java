@@ -55,7 +55,7 @@ public class Ability extends AbstractMoveableEntity {
                 scheduler.unscheduleAllEvents(this);
                 world.removeEntity(this);
                 return true;
-            } else if (e instanceof Obstacle || e instanceof Atlantis || e instanceof Furnace
+            } else if (e instanceof Obstacle || e instanceof Portal || e instanceof Furnace
                     || e instanceof Gold || e instanceof Quake || e instanceof Ability) {
                 scheduler.unscheduleAllEvents(this);
                 world.removeEntity(this);

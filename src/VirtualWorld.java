@@ -232,14 +232,14 @@ public final class VirtualWorld
                 if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Portal)
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
                 else {
-                    world.addEntity(new Portal("portal", new Point(pressed.x, pressed.y), imageStore.getImageList("atlantis"), 0, 0));
+                    world.addEntity(new Portal("portal", new Point(pressed.x, pressed.y), imageStore.getImageList("portal"), 0, 0));
                 }
                 break;
             case "d":
-                if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Portal)
+                if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof DerpPoly)
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
                 else {
-                    world.addEntity(new DerpPoly("derp", new Point(pressed.x, pressed.y), imageStore.getImageList("atlantis"), 0, 0));
+                    world.addEntity(new DerpPoly("derp", new Point(pressed.x, pressed.y), imageStore.getImageList("derp"), 0, 0));
                 }
                 break;
             case "s":

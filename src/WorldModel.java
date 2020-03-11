@@ -431,7 +431,7 @@ final class WorldModel {
       {
          Point pt = new Point(Integer.parseInt(properties[PORTAL_COL]),
                  Integer.parseInt(properties[PORTAL_ROW]));
-         AbstractEntity entity = new Portal(properties[PORTAL_ID],
+         AbstractEntity entity = new DerpPoly(properties[PORTAL_ID],
                  pt, imageStore.getImageList(DERP_KEY),0,0);
          tryAddEntity(entity);
       }

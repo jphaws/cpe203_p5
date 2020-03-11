@@ -5,11 +5,12 @@ import java.util.Optional;
 
 public class GhostNotFull extends AbstractMonsterFactory {
 
-
+    private Point respawn;
     public GhostNotFull(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod,
-                        int resourceLimit, int resourceCount)
+                        int resourceLimit, int resourceCount, Point respawn)
     {
         super(id, position, images, actionPeriod, animationPeriod);
+        this.respawn = respawn;
 
     }
 
@@ -35,7 +36,7 @@ public class GhostNotFull extends AbstractMonsterFactory {
         {
             AbstractMonsterFactory octo = GhostFull.createGhostFull(this.getId(), this.getResourceLimit(),
                     this.getPosition(), this.getActionPeriod(), this.getAnimationPeriod(),
-                    this.getImages());
+                    this.getImages(), this.respawn);
 
             world.removeEntity(this);
             scheduler.unscheduleAllEvents(this);
@@ -77,7 +78,9 @@ public class GhostNotFull extends AbstractMonsterFactory {
             return false;
         }
 
-        
     }
 
+    public Point getRespawn() {
+        return respawn;
+    }
 }

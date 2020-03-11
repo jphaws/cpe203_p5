@@ -17,8 +17,8 @@ public final class VirtualWorld
 
     private static final int VIEW_WIDTH = 1280;
     private static final int VIEW_HEIGHT = 960;
-//    private static final int VIEW_WIDTH = 640;
-//    private static final int VIEW_HEIGHT = 480;
+    //private static final int VIEW_WIDTH = 640;
+    //private static final int VIEW_HEIGHT = 480;
     private static final int TILE_WIDTH = 32;
     private static final int TILE_HEIGHT = 32;
     private static final int WORLD_WIDTH_SCALE = 2;
@@ -33,7 +33,7 @@ public final class VirtualWorld
     private static final String DEFAULT_IMAGE_NAME = "background_default";
     private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-    private String LOAD_FILE_NAME = "start.sav";
+    private String LOAD_FILE_NAME = "World.sav";
 
     private static final String FAST_FLAG = "-fast";
     private static final String FASTER_FLAG = "-faster";
@@ -193,8 +193,8 @@ public final class VirtualWorld
                 case 'o':
                     devMode = "o";       //activate obstacle edit mode
                     break;
-                case 'a':
-                    devMode = "a";       //activate atlantis edit mode
+                case 'p':
+                    devMode = "p";       //activate atlantis edit mode
                     break;
                 case 's':
                     devMode = "s";      //activate skeleton edit mode
@@ -203,7 +203,10 @@ public final class VirtualWorld
                     devMode = "g";       //activate gold edit mode
                     break;
                 case 'd':
-                    devMode = "d";       //activate ghost/demon edit mode
+                    devMode = "d";       //activate calpoly edit mode
+                    break;
+                case 'h':
+                    devMode = "h";      //ghost edit mode
                     break;
                 case 'l':
                     for (AbstractEntity e : world.getEntities()) {     //print list of all currently generated entities
@@ -246,7 +249,15 @@ public final class VirtualWorld
                 if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Skeleton)
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
                 else {
-                    world.addEntity(new Skeleton("skeleton", new Point(pressed.x, pressed.y), imageStore.getImageList("skeleton"), 900, 100));
+                    world.addEntity(new Skeleton("skeleton", new Point(pressed.x, pressed.y), imageStore.getImageList("skeleton"), 900, 100, new Point(pressed.x, pressed.y)));
+                }
+                break;
+            case "h":
+                if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof GhostNotFull
+                || world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof GhostFull)
+                    world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
+                else {
+                    world.addEntity(new GhostNotFull("ghost", new Point(pressed.x, pressed.y), imageStore.getImageList("ghost"), 900, 100,0,0, new Point(pressed.x, pressed.y)));
                 }
                 break;
             case "g":

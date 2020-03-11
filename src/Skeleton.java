@@ -7,11 +7,13 @@ public class Skeleton extends AbstractMonsterFactory{
 
 
     private static final String QUAKE_KEY = "quake";
+    private Point spawn;
 
     public Skeleton(String id, Point position,
-                    List<PImage> images, int actionPeriod, int animationPeriod)
+                    List<PImage> images, int actionPeriod, int animationPeriod, Point spawn)
     {
         super(id, position, images, actionPeriod, animationPeriod);
+        this.spawn = spawn;
     }
 
     public void executeActivity(WorldModel world,
@@ -58,5 +60,9 @@ public class Skeleton extends AbstractMonsterFactory{
             }
             return false;
         }
+    }
+
+    public Point getSpawn() {
+        return spawn;
     }
 }

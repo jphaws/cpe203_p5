@@ -9,6 +9,10 @@ public class Ability extends AbstractMoveableEntity {
     final int DIRECTION;
     Point target;
     boolean GHOST_FULL = false;
+    Skeleton skeleton;
+    GhostNotFull ghost;
+    boolean isSKEL = false;
+    boolean isGHOST = false;
 
     public Ability(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod, Player p) {
         super(id, position, images, actionPeriod, animationPeriod);
@@ -47,13 +51,32 @@ public class Ability extends AbstractMoveableEntity {
                 world.removeEntity(e);
                 scheduler.unscheduleAllEvents(this);
                 world.removeEntity(this);
+                GhostNotFull g = new GhostNotFull(e.getId(), ((GhostFull) e).getRespawn(), e.getImages()
+                ,700,100,1,0,((GhostFull) e).getRespawn());
+                ghost = g;
+                isGHOST = true;
                 GHOST_FULL = true;
 
-            } else if (e instanceof AbstractMonsterFactory || e instanceof Skeleton) {
+            } else if (e instanceof Skeleton) {
                 scheduler.unscheduleAllEvents(e);
                 world.removeEntity(e);
                 scheduler.unscheduleAllEvents(this);
                 world.removeEntity(this);
+                Skeleton s = new Skeleton(e.getId(), ((Skeleton) e).getSpawn(), e.getImages(),
+                        700, 100, ((Skeleton) e).getSpawn());
+                skeleton = s;
+                isSKEL = true;
+                return true;
+            }
+            else if(e instanceof GhostNotFull) {
+                scheduler.unscheduleAllEvents(e);
+                world.removeEntity(e);
+                scheduler.unscheduleAllEvents(this);
+                world.removeEntity(this);
+                GhostNotFull g = new GhostNotFull(e.getId(), ((GhostNotFull) e).getRespawn(), e.getImages()
+                        ,700,100,1,0,((GhostNotFull) e).getRespawn());
+                ghost = g;
+                isGHOST = true;
                 return true;
             } else if (e instanceof Obstacle || e instanceof Portal || e instanceof Furnace
                     || e instanceof Gold || e instanceof Quake || e instanceof Ability) {
@@ -93,6 +116,18 @@ public class Ability extends AbstractMoveableEntity {
             quake.scheduleActions(scheduler, world, imageStore);
         }
 
+        if(isSKEL) {
+            world.addEntity(skeleton);
+            skeleton.scheduleActions(scheduler, world, imageStore);
+            isSKEL = false;
+        }
+
+        if(isGHOST) {
+            System.out.println("Here");
+            world.addEntity(ghost);
+            ghost.scheduleActions(scheduler, world, imageStore);
+            isGHOST = false;
+        }
         if (GHOST_FULL) {
             Gold g = new Gold("gold", tgtPos, imageStore.getImageList("gold"), 10000000);
             world.addEntity(g);

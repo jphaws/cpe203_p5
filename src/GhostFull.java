@@ -5,32 +5,35 @@ import java.util.Optional;
 
 public class GhostFull extends AbstractMonsterFactory {
 
+    private Point respawn;
     public GhostFull(String id, Point position,
-                     List<PImage> images, int actionPeriod, int animationPeriod, int resourceLimit, int resourceCount)
+                     List<PImage> images, int actionPeriod, int animationPeriod,
+                     int resourceLimit, int resourceCount, Point respawn)
     {
         super(id, position, images, actionPeriod, animationPeriod);
+        this.respawn = respawn;
     }
 
     public static GhostFull createGhostFull(String id, int resourceLimit,
                                             Point position, int actionPeriod, int animationPeriod,
-                                            List<PImage> images)
+                                            List<PImage> images, Point respawn)
     {
         return new GhostFull(id, position, images, actionPeriod, animationPeriod,
-                resourceLimit, resourceLimit);
+                resourceLimit, resourceLimit, respawn);
     }
 
     public void executeActivity(WorldModel world,
                                         ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<AbstractEntity> fullTarget = world.findNearest(this.getPosition(),
-                Portal.class);
+                DerpPoly.class);
 
         if (fullTarget.isPresent() &&
                 moveTo(this, world, fullTarget.get(), scheduler))
         {
             //at atlantis trigger animation
             if(fullTarget.get() instanceof DerpPoly)
-                ((Portal)(fullTarget.get())).scheduleActions(scheduler, world, imageStore);
+                ((DerpPoly)(fullTarget.get())).scheduleActions(scheduler, world, imageStore);
 
             //transform to unfull
             transformFull(world, scheduler, imageStore);
@@ -48,7 +51,7 @@ public class GhostFull extends AbstractMonsterFactory {
     {
         AbstractMoveableEntity Ghost = new GhostNotFull(this.getId(),
                 this.getPosition(), this.getImages(), this.getActionPeriod(),
-                this.getAnimationPeriod(),this.getResourceLimit(), 0);
+                this.getAnimationPeriod(),this.getResourceLimit(), 0, this.respawn);
 
         world.removeEntity(this);
         scheduler.unscheduleAllEvents(this);
@@ -82,4 +85,7 @@ public class GhostFull extends AbstractMonsterFactory {
         }
     }
 
+    public Point getRespawn() {
+        return respawn;
+    }
 }

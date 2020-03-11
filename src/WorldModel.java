@@ -24,7 +24,7 @@ final class WorldModel {
    private static final int PLAYER_ACTION_PERIOD = 5;
    private static final int PLAYER_ANIMATION_PERIOD = 6;
 
-   private static final String GHOST_KEY = "octo";
+   private static final String GHOST_KEY = "ghost";
    private static final int GHOST_NUM_PROPERTIES = 7;
    private static final int GHOST_ID = 1;
    private static final int GHOST_COL = 2;
@@ -343,7 +343,7 @@ final class WorldModel {
                  imageStore.getImageList(GHOST_KEY),
                  Integer.parseInt(properties[GHOST_ACTION_PERIOD]),
                  Integer.parseInt(properties[GHOST_ANIMATION_PERIOD]),
-                 Integer.parseInt(properties[GHOST_LIMIT]),0);
+                 Integer.parseInt(properties[GHOST_LIMIT]),0,pt);
          tryAddEntity(entity);
       }
 
@@ -360,7 +360,7 @@ final class WorldModel {
                  pt,
                  imageStore.getImageList(SKELETON_KEY),
                  (Integer.parseInt(properties[SKELETON_ACTION_PERIOD]) / (SKELETON_PERIOD_SCALE)),
-                 (Integer.parseInt(properties[SKELETON_ANIMATION_PERIOD])) + rand.nextInt(SKELETON_ANIMATION_MAX - SKELETON_ANIMATION_MIN));
+                 (Integer.parseInt(properties[SKELETON_ANIMATION_PERIOD])) + rand.nextInt(SKELETON_ANIMATION_MAX - SKELETON_ANIMATION_MIN), pt);
          tryAddEntity(entity);
       }
 

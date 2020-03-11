@@ -50,6 +50,12 @@ final class WorldModel {
    private static final int OBSTACLE_COL = 2;
    private static final int OBSTACLE_ROW = 3;
 
+   private static final String TEMP_OBSTACLE_KEY = "temp";
+   private static final int TEMP_OBSTACLE_NUM_PROPERTIES = 4;
+   private static final int TEMP_OBSTACLE_ID = 1;
+   private static final int TEMP_OBSTACLE_COL = 2;
+   private static final int TEMP_OBSTACLE_ROW = 3;
+
    private static final String GOLD_KEY = "gold";
    private static final int GOLD_NUM_PROPERTIES = 5;
    private static final int GOLD_ID = 1;
@@ -220,6 +226,20 @@ final class WorldModel {
       }
    }
 
+   public void removeTempObstacles(EventScheduler scheduler){
+
+      List<AbstractEntity> ent = new LinkedList<>();
+      for(AbstractEntity e : entities){
+         if((e instanceof TempObstacle)){
+            ent.add(e);
+         }
+      }
+     for(AbstractEntity t : ent){
+        removeEntity(t);
+        scheduler.unscheduleAllEvents(t);
+     }
+   }
+
    private void tryAddEntity(AbstractEntity entity)
    {
       if (isOccupied(entity.getPosition()))
@@ -360,6 +380,20 @@ final class WorldModel {
 
       return properties.length == OBSTACLE_NUM_PROPERTIES;
    }
+   private boolean parseTempObstacle(String [] properties, ImageStore imageStore)
+   {
+      if (properties.length == TEMP_OBSTACLE_NUM_PROPERTIES)
+      {
+         Point pt = new Point(
+                 Integer.parseInt(properties[TEMP_OBSTACLE_COL]),
+                 Integer.parseInt(properties[TEMP_OBSTACLE_ROW]));
+         TempObstacle entity = new TempObstacle(properties[TEMP_OBSTACLE_ID],
+                 pt, imageStore.getImageList(TEMP_OBSTACLE_KEY));
+         tryAddEntity(entity);
+      }
+
+      return properties.length == TEMP_OBSTACLE_NUM_PROPERTIES;
+   }
 
    private boolean parseGOLD(String [] properties, ImageStore imageStore)
    {
@@ -428,6 +462,8 @@ final class WorldModel {
                return parsePlayer(properties, imageStore);
             case SKELETON_KEY:
                return parseSkeleton(properties,imageStore);
+            case TEMP_OBSTACLE_KEY:
+               return parseTempObstacle(properties, imageStore);
          }
       }
 

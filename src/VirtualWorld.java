@@ -15,10 +15,10 @@ public final class VirtualWorld
         extends PApplet {
     private static final int TIMER_ACTION_PERIOD = 100;
 
-//    private static final int VIEW_WIDTH = 1280;
-//    private static final int VIEW_HEIGHT = 960;
-    private static final int VIEW_WIDTH = 640;
-    private static final int VIEW_HEIGHT = 480;
+    private static final int VIEW_WIDTH = 1280;
+    private static final int VIEW_HEIGHT = 960;
+    //   private static final int VIEW_WIDTH = 640;
+//   private static final int VIEW_HEIGHT = 480;
     private static final int TILE_WIDTH = 32;
     private static final int TILE_HEIGHT = 32;
     private static final int WORLD_WIDTH_SCALE = 2;
@@ -104,6 +104,9 @@ public final class VirtualWorld
             }
             levelCompleted = false;
         }
+        if(player.getGoldCount() >= 10){
+            world.removeTempObstacles(scheduler);
+        }
         long time = System.currentTimeMillis();
         if (time >= next_time) {
             this.scheduler.updateOnTime(time);
@@ -140,6 +143,7 @@ public final class VirtualWorld
             player.scheduleActions(scheduler, world, imageStore);
             if (!world.isOccupied(pt)) {
                 world.moveEntity(player, pt);
+//            view.shiftView(dx, dy);
             }
             else if (world.getOccupancyCell(pt) instanceof Gold) {
                 world.removeEntity(world.getOccupancyCell(pt));

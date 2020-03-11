@@ -150,6 +150,10 @@ public final class VirtualWorld
                 player.increaseGoldCount();
                 System.out.println(player.getGoldCount());
             }
+            else if (world.getOccupancyCell(pt) instanceof Portal) {
+                levelNumber++;
+                levelCompleted = true;
+            }
         }
         if (key == ' ') {
             player.useWeapon(world, imageStore, scheduler);

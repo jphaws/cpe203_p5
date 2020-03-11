@@ -193,8 +193,8 @@ public final class VirtualWorld
                 case 'o':
                     devMode = "o";       //activate obstacle edit mode
                     break;
-                case 'a':
-                    devMode = "a";       //activate atlantis edit mode
+                case 'd':
+                    devMode = "d";       //activate DERP!!!! edit mode
                     break;
                 case 's':
                     devMode = "s";      //activate skeleton edit mode
@@ -202,8 +202,8 @@ public final class VirtualWorld
                 case 'g':
                     devMode = "g";       //activate gold edit mode
                     break;
-                case 'd':
-                    devMode = "d";       //activate ghost/demon edit mode
+                case 'p':
+                    devMode = "p";       //activate portal edit mode
                     break;
                 case 'l':
                     for (AbstractEntity e : world.getEntities()) {     //print list of all currently generated entities

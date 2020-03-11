@@ -13,7 +13,7 @@ final class WorldModel {
    private AbstractEntity occupancy[][];
    private Set<AbstractEntity> entities;
 
-   private static final int FISH_REACH = 1;
+   private static final int GOLD_REACH = 1;
 
    private static final String PLAYER_KEY = "player";
    private static final int PLAYER_NUM_PROPERTIES = 7;
@@ -50,12 +50,12 @@ final class WorldModel {
    private static final int OBSTACLE_COL = 2;
    private static final int OBSTACLE_ROW = 3;
 
-   private static final String FISH_KEY = "gold";
-   private static final int FISH_NUM_PROPERTIES = 5;
-   private static final int FISH_ID = 1;
-   private static final int FISH_COL = 2;
-   private static final int FISH_ROW = 3;
-   private static final int FISH_ACTION_PERIOD = 4;
+   private static final String GOLD_KEY = "gold";
+   private static final int GOLD_NUM_PROPERTIES = 5;
+   private static final int GOLD_ID = 1;
+   private static final int GOLD_COL = 2;
+   private static final int GOLD_ROW = 3;
+   private static final int GOLD_ACTION_PERIOD = 4;
 
    private static final String ATLANTIS_KEY = "atlantis";
    private static final int ATLANTIS_NUM_PROPERTIES = 4;
@@ -113,9 +113,9 @@ final class WorldModel {
 
    public Optional<Point> findOpenAround(Point pos)
    {
-      for (int dy = -FISH_REACH; dy <= FISH_REACH; dy++)
+      for (int dy = -GOLD_REACH; dy <= GOLD_REACH; dy++)
       {
-         for (int dx = -FISH_REACH; dx <= FISH_REACH; dx++)
+         for (int dx = -GOLD_REACH; dx <= GOLD_REACH; dx++)
          {
             Point newPt = new Point(pos.x + dx, pos.y + dy);
             if (withinBounds(newPt) &&
@@ -361,18 +361,18 @@ final class WorldModel {
       return properties.length == OBSTACLE_NUM_PROPERTIES;
    }
 
-   private boolean parseFish(String [] properties, ImageStore imageStore)
+   private boolean parseGOLD(String [] properties, ImageStore imageStore)
    {
-      if (properties.length == FISH_NUM_PROPERTIES)
+      if (properties.length == GOLD_NUM_PROPERTIES)
       {
-         Point pt = new Point(Integer.parseInt(properties[FISH_COL]),
-                 Integer.parseInt(properties[FISH_ROW]));
-         AbstractEntity entity = new Gold(properties[FISH_ID],
-                 pt, imageStore.getImageList(FISH_KEY), Integer.parseInt(properties[FISH_ACTION_PERIOD]));
+         Point pt = new Point(Integer.parseInt(properties[GOLD_COL]),
+                 Integer.parseInt(properties[GOLD_ROW]));
+         AbstractEntity entity = new Gold(properties[GOLD_ID],
+                 pt, imageStore.getImageList(GOLD_KEY), Integer.parseInt(properties[GOLD_ACTION_PERIOD]));
          tryAddEntity(entity);
       }
 
-      return properties.length == FISH_NUM_PROPERTIES;
+      return properties.length == GOLD_NUM_PROPERTIES;
    }
 
    private boolean parseAtlantis(String [] properties, ImageStore imageStore)
@@ -395,7 +395,7 @@ final class WorldModel {
       {
          Point pt = new Point(Integer.parseInt(properties[SGRASS_COL]),
                  Integer.parseInt(properties[SGRASS_ROW]));
-         AbstractEntity entity = SGrass.createSgrass(properties[SGRASS_ID],
+         AbstractEntity entity = Furnace.createFurnace(properties[SGRASS_ID],
                  pt,
                  Integer.parseInt(properties[SGRASS_ACTION_PERIOD]),
                  imageStore.getImageList(SGRASS_KEY));
@@ -418,8 +418,8 @@ final class WorldModel {
                return parseGhost(properties, imageStore);
             case OBSTACLE_KEY:
                return parseObstacle(properties, imageStore);
-            case FISH_KEY:
-               return parseFish(properties, imageStore);
+            case GOLD_KEY:
+               return parseGOLD(properties, imageStore);
             case ATLANTIS_KEY:
                return parseAtlantis(properties, imageStore);
             case SGRASS_KEY:

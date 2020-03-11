@@ -11,9 +11,9 @@ public class GhostFull extends AbstractMonsterFactory {
         super(id, position, images, actionPeriod, animationPeriod);
     }
 
-    public static GhostFull createOctoFull(String id, int resourceLimit,
-                                           Point position, int actionPeriod, int animationPeriod,
-                                           List<PImage> images)
+    public static GhostFull createGhostFull(String id, int resourceLimit,
+                                            Point position, int actionPeriod, int animationPeriod,
+                                            List<PImage> images)
     {
         return new GhostFull(id, position, images, actionPeriod, animationPeriod,
                 resourceLimit, resourceLimit);

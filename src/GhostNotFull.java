@@ -33,7 +33,7 @@ public class GhostNotFull extends AbstractMonsterFactory {
     {
         if (this.getResourceCount() >= this.getResourceLimit())
         {
-            AbstractMonsterFactory octo = GhostFull.createOctoFull(this.getId(), this.getResourceLimit(),
+            AbstractMonsterFactory octo = GhostFull.createGhostFull(this.getId(), this.getResourceLimit(),
                     this.getPosition(), this.getActionPeriod(), this.getAnimationPeriod(),
                     this.getImages());
 

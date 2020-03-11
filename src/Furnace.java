@@ -3,23 +3,23 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class SGrass extends AbstractActiveEntity {
+public class Furnace extends AbstractActiveEntity {
 
     private static final String GOLD_KEY = "gold";
     private static final String GOLD_ID_PREFIX = "fish -- ";
     private static final int GOLD_CORRUPT_MIN = 20000;
     private static final int GOLD_CORRUPT_MAX = 30000;
 
-    public SGrass(String id, Point position,
-                  List<PImage> images, int actionPeriod)
+    public Furnace(String id, Point position,
+                   List<PImage> images, int actionPeriod)
     {
         super(id, position, images, actionPeriod);
     }
 
-    public static SGrass createSgrass(String id, Point position, int actionPeriod,
-                                      List<PImage> images)
+    public static Furnace createFurnace(String id, Point position, int actionPeriod,
+                                        List<PImage> images)
     {
-        return new SGrass(id, position, images, actionPeriod);
+        return new Furnace(id, position, images, actionPeriod);
     }
 
     public void executeActivity(WorldModel world,

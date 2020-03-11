@@ -8,7 +8,7 @@ skeleton images/Walk1.png 255 255 255 128
 skeleton images/Walk2.png 255 255 255 128
 skeleton images/Walk3.png 255 255 255 128
 sea images/PNG/Tiles/gravel_stone_small.png 255 255 255 0
-octo images/Ghost1.png 255 255 255 0
+ghost images/Ghost1.png 255 255 255 0
 obstacle images/PNG/Tiles/brick_grey_small.png
 gold images/PNG/Items/ore_gold_small.png 255 255 255 0
 quake images/quake1.bmp 255 255 255 0

@@ -13,7 +13,7 @@ public class Player extends AbstractAnimatedEntity{
         2 = left
         3 = right
      */
-    private int goldCount = 0;
+    private int goldCount;
     private List<PImage> fullList = super.getImages();
 
     public Player(String id, Point position,int actionPeriod, int animationPeriod, List<PImage> images, int goldCount) {

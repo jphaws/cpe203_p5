@@ -43,9 +43,11 @@ public class Player extends AbstractAnimatedEntity{
         } else
             p = new Point(this.getPosition().x + 1, this.getPosition().y);
 
-        Ability f = new Ability("ability", p, imageStore.getImageList("ability"),  2, 5, this);
-        world.addEntity(f);
-        f.scheduleActions(scheduler, world, imageStore);
+        if(!(world.getOccupancyCell(p) instanceof Obstacle)) {
+            Ability f = new Ability("ability", p, imageStore.getImageList("ability"), 2, 5, this);
+            world.addEntity(f);
+            f.scheduleActions(scheduler, world, imageStore);
+        }
     }
 
     public void turn(int n){

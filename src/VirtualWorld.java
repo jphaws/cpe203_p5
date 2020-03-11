@@ -33,7 +33,7 @@ public final class VirtualWorld
     private static final String DEFAULT_IMAGE_NAME = "background_default";
     private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-    private String LOAD_FILE_NAME = "World.sav";
+    private String LOAD_FILE_NAME = "world3.sav";
 
     private static final String FAST_FLAG = "-fast";
     private static final String FASTER_FLAG = "-faster";
@@ -167,23 +167,23 @@ public final class VirtualWorld
         }
         int vx = 0;
         int vy = 0;
-        if(key == 'w') {
-            vy -= 1;
-            WorldView v = view;
-            v.shiftView(vx, vy);
-        } else if(key == 's') {
-            vy += 1;
-            WorldView v = view;
-            v.shiftView(vx, vy);
-        } else if(key == 'a'){
-            vx -= 1;
-            WorldView v = view;
-            v.shiftView(vx, vy);
-        } else if(key == 'd') {
-            vx += 1;
-            WorldView v = view;
-            v.shiftView(vx, vy);
-        }
+//        if(key == 'w') {
+//            vy -= 1;
+//            WorldView v = view;
+//            v.shiftView(vx, vy);
+//        } else if(key == 's') {
+//            vy += 1;
+//            WorldView v = view;
+//            v.shiftView(vx, vy);
+//        } else if(key == 'a'){
+//            vx -= 1;
+//            WorldView v = view;
+//            v.shiftView(vx, vy);
+//        } else if(key == 'd') {
+//            vx += 1;
+//            WorldView v = view;
+//            v.shiftView(vx, vy);
+//        }
 
         if (key == '~') {
             devModeLock = false;
@@ -210,7 +210,7 @@ public final class VirtualWorld
                     break;
                 case 'l':
                     for (AbstractEntity e : world.getEntities()) {     //print list of all currently generated entities
-                        if (!(e instanceof Player)) {
+                        if ((e instanceof Gold) || (e instanceof Skeleton)) {
                             System.out.println(e);
                         }
                     }

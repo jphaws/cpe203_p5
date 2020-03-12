@@ -33,7 +33,7 @@ public final class VirtualWorld
     private static final String DEFAULT_IMAGE_NAME = "background_default";
     private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-    private String LOAD_FILE_NAME = "level3.sav";
+    private String LOAD_FILE_NAME = "start.sav";
 
     private static final String FAST_FLAG = "-fast";
     private static final String FASTER_FLAG = "-faster";
@@ -65,7 +65,7 @@ public final class VirtualWorld
        Processing entry point for "sketch" setup.
     */
     public void setup() {
-        f = createFont("Fira Code", 16, true);
+        f = createFont("Optima-BoldItalic", 16, true);
 
         this.imageStore = new ImageStore(
                 createImageColored(TILE_WIDTH, TILE_HEIGHT, DEFAULT_IMAGE_COLOR));
@@ -134,7 +134,7 @@ public final class VirtualWorld
 
         if(player.getHealth() == 0) {
             textFont(f, 60);
-            text("U LOOSE!",500,300);
+            text("U LOSE!",500,300);
             text("GAME OVER!",450,500);
         }
 

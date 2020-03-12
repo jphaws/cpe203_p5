@@ -208,6 +208,16 @@ final class WorldModel {
       }
    }
 
+   public int goldOnMap() {
+      int counter = 0;
+      for(AbstractEntity e : entities){
+         if((e instanceof Gold)){
+            counter ++;
+         }
+      }
+      return counter;
+   }
+
    public Player getPlayer() {
       for(AbstractEntity e : entities){
          if((e instanceof Player)){

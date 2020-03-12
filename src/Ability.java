@@ -32,16 +32,9 @@ public class Ability extends AbstractMoveableEntity {
 
     @Override
     protected boolean moveTo(AbstractMoveableEntity Entity, WorldModel world, AbstractEntity target, EventScheduler scheduler) {
-        Point nextPos;
-        if (DIRECTION == 0) {
-            nextPos = new Point(this.getPosition().x, this.getPosition().y + 1);
-        } else if (DIRECTION == 2) {
-            nextPos = new Point(this.getPosition().x - 1, this.getPosition().y);
-        } else if (DIRECTION == 3) {
-            nextPos = new Point(this.getPosition().x + 1, this.getPosition().y);
-        } else {
-            nextPos = new Point(this.getPosition().x, this.getPosition().y - 1);
-        }
+        PathingStrategy straight = new AxeThrowingPath();
+        List<Point> ps = straight.computePath(this.getPosition(), new Point(DIRECTION,0),null,null,null);
+        Point nextPos = ps.get(0);
 
         if (world.getOccupant(nextPos).isPresent()) {
             Optional<AbstractEntity> occupant = world.getOccupant(nextPos);

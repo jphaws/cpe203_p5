@@ -211,7 +211,6 @@ obstacle obstacle 28 0
 obstacle obstacle 31 27
 obstacle obstacle 0 26
 obstacle obstacle 8 23
-atlantis atlantis 1 1
 obstacle obstacle 17 19
 obstacle obstacle 26 19
 obstacle obstacle 39 23
@@ -265,7 +264,6 @@ obstacle obstacle 11 6
 obstacle obstacle 14 4
 obstacle obstacle 6 10
 obstacle obstacle 5 27
-gold gold 38 28 1000000
 obstacle obstacle 26 17
 gold gold 1 28 1000000
 obstacle obstacle 4 10
@@ -1764,4 +1762,4 @@ ghost ghost 29 20 1000 982 100
 ghost ghost 34 28 1000 982 100
 ghost ghost 30 28 1000 982 100
 portal portal 1 1
-derp derp 36 28
+derp derp 38 28

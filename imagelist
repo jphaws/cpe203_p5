@@ -18,7 +18,7 @@ quake images/quake4.bmp 255 255 255 0
 quake images/quake5.bmp 255 255 255 0
 quake images/quake6.bmp 255 255 255 0
 bubbles images/PNG/Tiles/lava.png
-seaGrass images/PNG/Tiles/oven_small.png 255 255 255 0
+furnace images/PNG/Tiles/oven_small.png 255 255 255 0
 background_default images/none.bmp
 player images/player_down.png 255 255 255 0
 player images/player_up.png 55 255 255 0

@@ -71,12 +71,12 @@ final class WorldModel {
    private static final String DERP_KEY = "derp";
 
 
-   private static final String SGRASS_KEY = "seaGrass";
-   private static final int SGRASS_NUM_PROPERTIES = 5;
-   private static final int SGRASS_ID = 1;
-   private static final int SGRASS_COL = 2;
-   private static final int SGRASS_ROW = 3;
-   private static final int SGRASS_ACTION_PERIOD = 4;
+   private static final String FURNACE_KEY = "furnace";
+   private static final int FURNACE_NUM_PROPERTIES = 5;
+   private static final int FURNACE_ID = 1;
+   private static final int FURNACE_COL = 2;
+   private static final int FURNACE_ROW = 3;
+   private static final int FURNACE_ACTION_PERIOD = 4;
 
    private static final String BGND_KEY = "background";
    private static final int BGND_NUM_PROPERTIES = 4;
@@ -439,20 +439,20 @@ final class WorldModel {
       return properties.length == PORTAL_NUM_PROPERTIES;
    }
 
-   private boolean parseSgrass(String [] properties, ImageStore imageStore)
+   private boolean parseFURNACE(String [] properties, ImageStore imageStore)
    {
-      if (properties.length == SGRASS_NUM_PROPERTIES)
+      if (properties.length == FURNACE_NUM_PROPERTIES)
       {
-         Point pt = new Point(Integer.parseInt(properties[SGRASS_COL]),
-                 Integer.parseInt(properties[SGRASS_ROW]));
-         AbstractEntity entity = Furnace.createFurnace(properties[SGRASS_ID],
+         Point pt = new Point(Integer.parseInt(properties[FURNACE_COL]),
+                 Integer.parseInt(properties[FURNACE_ROW]));
+         AbstractEntity entity = Furnace.createFurnace(properties[FURNACE_ID],
                  pt,
-                 Integer.parseInt(properties[SGRASS_ACTION_PERIOD]),
-                 imageStore.getImageList(SGRASS_KEY));
+                 Integer.parseInt(properties[FURNACE_ACTION_PERIOD]),
+                 imageStore.getImageList(FURNACE_KEY));
          tryAddEntity(entity);
       }
 
-      return properties.length == SGRASS_NUM_PROPERTIES;
+      return properties.length == FURNACE_NUM_PROPERTIES;
    }
 
    private boolean processLine(String line, ImageStore imageStore)
@@ -472,8 +472,8 @@ final class WorldModel {
                return parseGOLD(properties, imageStore);
             case PORTAL_KEY:
                return parsePortal(properties, imageStore);
-            case SGRASS_KEY:
-               return parseSgrass(properties, imageStore);
+            case FURNACE_KEY:
+               return parseFURNACE(properties, imageStore);
             case PLAYER_KEY:
                return parsePlayer(properties, imageStore);
             case SKELETON_KEY:

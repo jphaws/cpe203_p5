@@ -3,7 +3,7 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class Skeleton extends AbstractMonsterFactory{
+public class Skeleton extends AbstractMonster {
 
 
     private static final String QUAKE_KEY = "quake";

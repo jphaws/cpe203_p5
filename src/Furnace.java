@@ -5,10 +5,7 @@ import java.util.Optional;
 
 public class Furnace extends AbstractActiveEntity {
 
-    private static final String GOLD_KEY = "gold";
-    private static final String GOLD_ID_PREFIX = "fish -- ";
-    private static final int GOLD_CORRUPT_MIN = 20000;
-    private static final int GOLD_CORRUPT_MAX = 30000;
+    private static final String GOLD_ID_PREFIX = "gold";
 
     public Furnace(String id, Point position,
                    List<PImage> images, int actionPeriod)
@@ -29,9 +26,7 @@ public class Furnace extends AbstractActiveEntity {
 
         if (openPt.isPresent())
         {
-            Gold gold = new Gold(GOLD_ID_PREFIX + this.getId(),
-                    openPt.get(), imageStore.getImageList(GOLD_KEY),GOLD_CORRUPT_MIN +
-                            this.getRand().nextInt(GOLD_CORRUPT_MAX - GOLD_CORRUPT_MIN));
+            Gold gold = (Gold)FactoryEntity.create(GOLD_ID_PREFIX, imageStore, openPt.get()); //20000+this.getRand().nextInt(30000 - 20000);
             world.addEntity(gold);
             gold.scheduleActions(scheduler, world, imageStore);
         }

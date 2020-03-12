@@ -78,7 +78,7 @@ public final class VirtualWorld
         loadImages(IMAGE_LIST_FILE_NAME, imageStore, this);
         loadWorld(world, LOAD_FILE_NAME, imageStore);
 
-        this.player = new Player("player", new Point(5, 5), 5, 5, imageStore.getImageList("player"), 0);
+        this.player = (Player)FactoryEntity.create("player", imageStore, new Point(5, 5));
         world.addEntity(player);
 
         scheduleActions(world, scheduler, imageStore);
@@ -299,7 +299,7 @@ public final class VirtualWorld
                 || world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof GhostFull)
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
                 else {
-                    world.addEntity(new GhostNotFull("ghost", new Point(pressed.x, pressed.y), imageStore.getImageList("ghost"), 900, 100,0,0, new Point(pressed.x, pressed.y)));
+                    world.addEntity(new GhostNotFull("ghost", new Point(pressed.x, pressed.y), imageStore.getImageList("ghost"), 900, 100, new Point(pressed.x, pressed.y)));
                 }
                 break;
             case "g":

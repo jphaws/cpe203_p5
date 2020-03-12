@@ -3,7 +3,7 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class GhostFull extends AbstractMonsterFactory {
+public class GhostFull extends AbstractMonster {
 
     private Point respawn;
     public GhostFull(String id, Point position,
@@ -49,9 +49,7 @@ public class GhostFull extends AbstractMonsterFactory {
     private void transformFull(WorldModel world,
                                EventScheduler scheduler, ImageStore imageStore)
     {
-        AbstractMoveableEntity Ghost = new GhostNotFull(this.getId(),
-                this.getPosition(), this.getImages(), this.getActionPeriod(),
-                this.getAnimationPeriod(),this.getResourceLimit(), 0, this.respawn);
+        AbstractMoveableEntity Ghost = (GhostNotFull)FactoryEntity.create("ghost", imageStore, this.getPosition());
 
         world.removeEntity(this);
         scheduler.unscheduleAllEvents(this);

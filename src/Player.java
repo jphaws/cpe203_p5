@@ -1,7 +1,5 @@
 import processing.core.PImage;
 
-import javax.swing.*;
-import java.awt.image.PixelInterleavedSampleModel;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +43,7 @@ public class Player extends AbstractAnimatedEntity{
         } else
             p = new Point(this.getPosition().x + 1, this.getPosition().y);
 
-        if(world.getOccupancyCell(p) instanceof AbstractMonsterFactory) {
+        if(world.getOccupancyCell(p) instanceof AbstractMonster) {
             Optional<AbstractEntity> occupant = world.getOccupant(p);
             AbstractEntity e = occupant.get();
             world.removeEntity(e);

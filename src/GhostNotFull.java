@@ -3,11 +3,11 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class GhostNotFull extends AbstractMonsterFactory {
+public class GhostNotFull extends AbstractMonster {
 
     private Point respawn;
     public GhostNotFull(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod,
-                        int resourceLimit, int resourceCount, Point respawn)
+                     Point respawn)
     {
         super(id, position, images, actionPeriod, animationPeriod);
         this.respawn = respawn;
@@ -34,15 +34,15 @@ public class GhostNotFull extends AbstractMonsterFactory {
     {
         if (this.getResourceCount() >= this.getResourceLimit())
         {
-            AbstractMonsterFactory octo = GhostFull.createGhostFull(this.getId(), this.getResourceLimit(),
+            AbstractMonster g = GhostFull.createGhostFull(this.getId(), this.getResourceLimit(),
                     this.getPosition(), this.getActionPeriod(), this.getAnimationPeriod(),
                     this.getImages(), this.respawn);
 
             world.removeEntity(this);
             scheduler.unscheduleAllEvents(this);
 
-            world.addEntity(octo);
-            octo.scheduleActions(scheduler, world, imageStore);
+            world.addEntity(g);
+            g.scheduleActions(scheduler, world, imageStore);
 
             return true;
         }
@@ -55,7 +55,7 @@ public class GhostNotFull extends AbstractMonsterFactory {
     {
         if (adjacent(Entity.getPosition(), target.getPosition()))
         {
-            ((AbstractMonsterFactory) Entity).setResourceCount(((AbstractMonsterFactory) Entity).getResourceCount() + 1);
+            ((AbstractMonster) Entity).setResourceCount(((AbstractMonster) Entity).getResourceCount() + 1);
             world.removeEntity(target);
             scheduler.unscheduleAllEvents(target);
 

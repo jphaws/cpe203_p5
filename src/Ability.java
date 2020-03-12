@@ -45,7 +45,7 @@ public class Ability extends AbstractMoveableEntity {
                 scheduler.unscheduleAllEvents(this);
                 world.removeEntity(this);
                 GhostNotFull g = new GhostNotFull(e.getId(), ((GhostFull) e).getRespawn(), e.getImages()
-                ,700,100,1,0,((GhostFull) e).getRespawn());
+                ,700,100, ((GhostFull) e).getRespawn());
                 ghost = g;
                 isGHOST = true;
                 GHOST_FULL = true;
@@ -67,7 +67,7 @@ public class Ability extends AbstractMoveableEntity {
                 scheduler.unscheduleAllEvents(this);
                 world.removeEntity(this);
                 GhostNotFull g = new GhostNotFull(e.getId(), ((GhostNotFull) e).getRespawn(), e.getImages()
-                        ,700,100,1,0,((GhostNotFull) e).getRespawn());
+                        ,700,100,((GhostNotFull) e).getRespawn());
                 ghost = g;
                 isGHOST = true;
                 return true;
@@ -121,7 +121,7 @@ public class Ability extends AbstractMoveableEntity {
             isGHOST = false;
         }
         if (GHOST_FULL) {
-            Gold g = new Gold("gold", tgtPos, imageStore.getImageList("gold"), 10000000);
+            Gold g = (Gold)FactoryEntity.create("gold", imageStore,tgtPos);
             world.addEntity(g);
             g.scheduleActions(scheduler, world, imageStore);
             GHOST_FULL = false;

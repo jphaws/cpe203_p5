@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="3091.0" y="3053.0">com</node>
+    <node x="1673.7500000000002" y="664.0">TempObstacle</node>
+    <node x="724.0" y="2362.0">Node</node>
+    <node x="942.0" y="2465.0">Activity</node>
+    <node x="520.0" y="3053.0">toolbarButtonGraphics</node>
+    <node x="0.0" y="3053.0">EventComparator</node>
+    <node x="1052.0" y="3053.0">groovyjarjarasm</node>
+    <node x="2613.0" y="3053.0">java</node>
+    <node x="457.0" y="1517.0">GhostFull</node>
+    <node x="2445.0" y="3053.0">javax</node>
+    <node x="770.2500000000002" y="864.0">Quake</node>
+    <node x="0.0" y="2955.0">AxeThrowingPath</node>
+    <node x="1376.5000000000002" y="1196.0">Ability</node>
+    <node x="2456.75" y="652.0">Gold</node>
+    <node x="2095.0" y="3053.0">images</node>
+    <node x="1728.2500000000002" y="787.0">Player</node>
+    <node x="2482.0" y="2744.0">Background</node>
+    <node x="1160.5000000000002" y="1251.0">AbstractMonster</node>
+    <node x="2047.75" y="620.0">Furnace</node>
+    <node x="1717.0" y="3053.0">META-INF</node>
+    <node x="2270.0" y="3053.0">groovy</node>
+    <node x="1779.2500000000002" y="0.0">AbstractEntity</node>
+    <node x="1514.0" y="3053.0">processing</node>
+    <node x="233.0" y="3053.0">groovyjarjarcommonscli</node>
+    <node x="800.0" y="3053.0">groovyjarjarantlr</node>
+    <node x="1290.0" y="3053.0">japplemenubar</node>
+    <node x="1906.0" y="3053.0">netscape</node>
+    <node x="1320.75" y="652.0">Obstacle</node>
+    <node x="1263.0" y="2362.0">Action</node>
+    <node x="1187.25" y="885.0">AbstractMoveableEntity</node>
+    <node x="1825.7500000000002" y="620.0">AbstractAnimatedEntity</node>
+    <node x="3004.25" y="0.0">VirtualWorld</node>
+    <node x="2774.0" y="3053.0">icon</node>
+    <node x="699.0" y="2955.0">AStarPathingStrategy</node>
+    <node x="0.0" y="0.0">WorldModel</node>
+    <node x="1539.0000000000002" y="1528.0">GhostNotFull</node>
+    <node x="3245.0" y="3053.0">sun</node>
+    <node x="2122.0" y="2744.0">EventScheduler</node>
+    <node x="3167.0" y="2744.0">FactoryEntity</node>
+    <node x="0.0" y="2362.0">ImageStore</node>
+    <node x="1398.0" y="2955.0">SingleStepPathingStrategy</node>
+    <node x="1533.5000000000002" y="464.0">AbstractObstacle</node>
+    <node x="2562.25" y="908.0">Portal</node>
+    <node x="998.0000000000002" y="1528.0">Skeleton</node>
+    <node x="699.0" y="2744.0">PathingStrategy</node>
+    <node x="3399.0" y="3053.0">org</node>
+    <node x="1829.0" y="2362.0">WorldView</node>
+    <node x="462.0" y="2362.0">Viewport</node>
+    <node x="2935.0" y="3053.0">Functions</node>
+    <node x="2949.0" y="2744.0">Point</node>
+    <node x="3553.0" y="3053.0">jdk</node>
+    <node x="2145.25" y="908.0">DerpPoly</node>
+    <node x="2719.0" y="2744.0">Event</node>
+    <node x="1416.0" y="2465.0">Animation</node>
+    <node x="2043.75" y="387.0">AbstractActiveEntity</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="AxeThrowingPath" target="PathingStrategy">
+      <point x="0.0" y="-26.5" />
+      <point x="339.5" y="2930.0" />
+      <point x="812.1666666666666" y="2930.0" />
+      <point x="-226.33333333333337" y="80.5" />
+    </edge>
+    <edge source="TempObstacle" target="AbstractObstacle">
+      <point x="0.0" y="-14.5" />
+      <point x="1739.7500000000002" y="595.0" />
+      <point x="1653.5000000000002" y="595.0" />
+      <point x="40.0" y="14.5" />
+    </edge>
+    <edge source="AbstractObstacle" target="AbstractEntity">
+      <point x="0.0" y="-14.5" />
+      <point x="1613.5000000000002" y="362.0" />
+      <point x="1832.0000000000002" y="362.0" />
+      <point x="-52.75" y="168.5" />
+    </edge>
+    <edge source="AStarPathingStrategy" target="PathingStrategy">
+      <point x="0.0" y="-26.5" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="GhostNotFull" target="AbstractMonster">
+      <point x="0.0" y="-80.5" />
+      <point x="1799.5000000000002" y="1492.0" />
+      <point x="1323.8333333333335" y="1492.0" />
+      <point x="65.33333333333326" y="80.5" />
+    </edge>
+    <edge source="Animation" target="Action">
+      <point x="0.0" y="-91.5" />
+      <point x="1600.0" y="2440.0" />
+      <point x="1445.25" y="2440.0" />
+      <point x="60.75" y="26.5" />
+    </edge>
+    <edge source="AbstractActiveEntity" target="AbstractEntity">
+      <point x="0.0" y="-91.5" />
+      <point x="2242.25" y="362.0" />
+      <point x="1937.5000000000002" y="362.0" />
+      <point x="52.75" y="168.5" />
+    </edge>
+    <edge source="AbstractMonster" target="AbstractMoveableEntity">
+      <point x="0.0" y="-80.5" />
+      <point x="1258.5000000000002" y="1171.0" />
+      <point x="1317.5" y="1171.0" />
+      <point x="-130.25" y="81.5" />
+    </edge>
+    <edge source="DerpPoly" target="AbstractAnimatedEntity">
+      <point x="0.0" y="-58.5" />
+      <point x="2343.75" y="767.0" />
+      <point x="1967.1500000000003" y="767.0" />
+      <point x="40.40000000000009" y="58.5" />
+    </edge>
+    <edge source="Skeleton" target="AbstractMonster">
+      <point x="0.0" y="-80.5" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="Quake" target="AbstractAnimatedEntity">
+      <point x="0.0" y="-102.5" />
+      <point x="968.7500000000002" y="757.0" />
+      <point x="1845.9500000000003" y="757.0" />
+      <point x="-80.79999999999995" y="58.5" />
+    </edge>
+    <edge source="SingleStepPathingStrategy" target="PathingStrategy">
+      <point x="0.0" y="-26.5" />
+      <point x="1737.5" y="2930.0" />
+      <point x="1264.8333333333335" y="2930.0" />
+      <point x="226.33333333333348" y="80.5" />
+    </edge>
+    <edge source="GhostFull" target="AbstractMonster">
+      <point x="0.0" y="-91.5" />
+      <point x="717.5" y="1492.0" />
+      <point x="1193.166666666667" y="1492.0" />
+      <point x="-65.33333333333326" y="80.5" />
+    </edge>
+    <edge source="Obstacle" target="AbstractObstacle">
+      <point x="0.0" y="-26.5" />
+      <point x="1487.25" y="595.0" />
+      <point x="1573.5000000000002" y="595.0" />
+      <point x="-40.0" y="14.5" />
+    </edge>
+    <edge source="Furnace" target="AbstractActiveEntity">
+      <point x="0.0" y="-58.5" />
+      <point x="0.0" y="91.5" />
+    </edge>
+    <edge source="Ability" target="AbstractMoveableEntity">
+      <point x="0.0" y="-135.5" />
+      <point x="1637.0000000000002" y="1171.0" />
+      <point x="1578.0" y="1171.0" />
+      <point x="130.25" y="81.5" />
+    </edge>
+    <edge source="Portal" target="AbstractAnimatedEntity">
+      <point x="-1.1368683772161603E-13" y="-58.5" />
+      <point x="2760.75" y="757.0" />
+      <point x="2007.5500000000002" y="757.0" />
+      <point x="80.79999999999995" y="58.5" />
+    </edge>
+    <edge source="Gold" target="AbstractActiveEntity">
+      <point x="0.0" y="-26.5" />
+      <point x="2651.25" y="595.0" />
+      <point x="2374.5833333333335" y="595.0" />
+      <point x="132.33333333333348" y="91.5" />
+    </edge>
+    <edge source="AbstractAnimatedEntity" target="AbstractActiveEntity">
+      <point x="0.0" y="-58.5" />
+      <point x="1926.7500000000002" y="595.0" />
+      <point x="2109.9166666666665" y="595.0" />
+      <point x="-132.33333333333348" y="91.5" />
+    </edge>
+    <edge source="AbstractMoveableEntity" target="AbstractAnimatedEntity">
+      <point x="0.0" y="-81.5" />
+      <point x="1447.75" y="767.0" />
+      <point x="1886.3500000000001" y="767.0" />
+      <point x="-40.40000000000009" y="58.5" />
+    </edge>
+    <edge source="Player" target="AbstractAnimatedEntity">
+      <point x="0.0" y="-179.5" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="Activity" target="Action">
+      <point x="0.0" y="-91.5" />
+      <point x="1169.0" y="2440.0" />
+      <point x="1323.75" y="2440.0" />
+      <point x="-60.75" y="26.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5706051873198847" x="481.0" y="510.5" />
+  <SelectedNodes>
+    <node>com</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

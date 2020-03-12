@@ -360,8 +360,7 @@ final class WorldModel {
                  pt,
                  imageStore.getImageList(GHOST_KEY),
                  Integer.parseInt(properties[GHOST_ACTION_PERIOD]),
-                 Integer.parseInt(properties[GHOST_ANIMATION_PERIOD]),
-                 Integer.parseInt(properties[GHOST_LIMIT]),0,pt);
+                 Integer.parseInt(properties[GHOST_ANIMATION_PERIOD]),pt);
          tryAddEntity(entity);
       }
 

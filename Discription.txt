@@ -9,3 +9,6 @@ We still used the hierarchy of the entities. We still have abstract classes that
 We created an entity factory which creates the monsters. We decided not to include obstacles and thing that don't get
 regenerated, so things that only gets parsed into the world from the file. We thought this would be more efficient and
 smarter to do rather than having them go through the entity factory. It would save more time, and would be more efficient.
+
+You can also find this project on Github under the username jphaws. This is the link:
+https://github.com/jphaws/cpe203_p5

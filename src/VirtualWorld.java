@@ -65,7 +65,7 @@ public final class VirtualWorld
        Processing entry point for "sketch" setup.
     */
     public void setup() {
-        f = createFont("Arial", 16, true);
+        f = createFont("Fira Code", 16, true);
 
         this.imageStore = new ImageStore(
                 createImageColored(TILE_WIDTH, TILE_HEIGHT, DEFAULT_IMAGE_COLOR));
@@ -94,17 +94,17 @@ public final class VirtualWorld
                     setup();
                     break;
                 case 0:
-                    LOAD_FILE_NAME = "world.sav";
+                    LOAD_FILE_NAME = "level1.sav";
                     setup();
                     level = 1;
                     break;
                 case 1:
-                    LOAD_FILE_NAME = "world2.sav";
+                    LOAD_FILE_NAME = "level2.sav";
                     setup();
                     level = 2;
                     break;
                 case 2:
-                    LOAD_FILE_NAME = "world3.sav";
+                    LOAD_FILE_NAME = "level3.sav";
                     setup();
                     level = 3;
                     break;
@@ -129,7 +129,7 @@ public final class VirtualWorld
         textFont(f,16);
         fill(9);
         text("Health: " + player.getHealth(),10,20);
-        text("GOLD Count: " + player.getGoldCount(),100,20);
+        text("GOLD Count: " + player.getGoldCount(),110,20);
         text("LEVEL: " + level,600,20);
 
         if(player.getHealth() == 0) {

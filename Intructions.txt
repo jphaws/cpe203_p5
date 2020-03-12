@@ -1,0 +1,37 @@
+We were inspired by pac-man to create this game.
+
+The whole point of the game is to advance through the levels by collecting 10 pieces of gold
+and going through the portals without getting killed, and also
+to beat the monsters in collecting the gold.
+
+The base of this game is built by these entities (Entities that we added in):
+    1. Player/Axe ability: The main character of the game. The point of him is to collect 10 pieces of gold from the map
+    to escape the level and move on. Player can kill ghosts and skeletons with his axe throwing
+    ability.
+
+    2. Skeletons: The point of the skeletons are to hunt you down and kill you before you escape
+    the level. Have the ability to respawn unless player kills skeleton from one till in front.
+
+    3. Ghosts: The point of the ghost are to eat the coins on the map and return it to their base.
+    There are a limited amount of coins on map 2 and 3, so if the ghost return the coins to its base
+    before you get 10, then you lose the game. have ability to spawn unless player kills within one tile.
+
+    4. Portal/Cal Poly Logos: The portal is a way for the player to advance to the next level. The Cal Poly
+    logo is where the ghosts will bring the gold to (home base for ghosts).
+
+    5. Temporary Walls: These walls were created to block of the portal which is the exit way out of the level.
+    to open these walls all the player has to do is collect 10 pieces of gold and the walls will automatically go
+    down.
+
+    At the starting of the game you will be put into a game beginning screen where you will have to press enter to start.
+Once you press enter it will then take you to the first level. This level was built a bit easier so you can get used to
+the keys, and the objective of the game. It has unlimited gold production, just for this level. You will still have to
+beat the ghosts to the gold and still have to kill the skeletons. Once you collect 10 gold, the door to the next level opens
+up. In level 2 and 3, there is a limited amount of gold, so this is where you will have to actually play smart and beat
+the ghosts to the gold. Once you collect 10 gold, you will be able to pass on to level 3 and then win the game.
+
+!!!NEW DEVELOPER MODE!!!
+    We also created a developer mode where you can make maps without having to manually input points. When in dev mode
+you will be able to add entities and remove entities. Once you are satisfied with your map placement of all the entities,
+all you have to do is press the 'l' key and it generates the text you have to copy and paste into a file. Finally, all you
+have to do it add it to a simple switch statement in Virtual World and your ready to play your new level!!!

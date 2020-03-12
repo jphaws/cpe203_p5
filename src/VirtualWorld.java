@@ -108,10 +108,13 @@ public final class VirtualWorld
                     setup();
                     level = 3;
                     break;
+                case 3:
+                    LOAD_FILE_NAME = "Winner.sav";
+                    setup();
+                    break;
             }
             levelCompleted = false;
         }
-
         if(player.getGoldCount() >= 10){
             world.removeTempObstacles(scheduler);
         }
@@ -177,7 +180,9 @@ public final class VirtualWorld
             }
         }
         if (key == ' ') {
-            player.useWeapon(world, imageStore, scheduler);
+           if(!(world.getPlayer() == null)) {
+               player.useWeapon(world, imageStore, scheduler);
+           }
         }
 
         if (key == ENTER || key == RETURN) {
@@ -215,7 +220,7 @@ public final class VirtualWorld
                     devMode = "o";       //activate obstacle edit mode
                     break;
                 case 'p':
-                    devMode = "p";       //activate atlantis edit mode
+                    devMode = "p";       //activate portal edit mode
                     break;
                 case 's':
                     devMode = "s";      //activate skeleton edit mode
@@ -229,9 +234,18 @@ public final class VirtualWorld
                 case 'h':
                     devMode = "h";      //ghost edit mode
                     break;
+                case 't':
+                    devMode = "t";      //TempObstacle edit mode
+                    break;
+                case '+':
+                    player.increaseGoldCount();
+                    break;
+                case 'f':
+                    devMode = "f";      //Furnace edit mode
+                    break;
                 case 'l':
                     for (AbstractEntity e : world.getEntities()) {     //print list of all currently generated entities
-                        if ((e instanceof Gold) || (e instanceof Skeleton)) {
+                        if ((e instanceof Gold) || (e instanceof Skeleton) ) {
                             System.out.println(e);
                         }
                     }
@@ -242,7 +256,7 @@ public final class VirtualWorld
 
     public void mousePressed() {
         Point pressed = mouseToPoint(mouseX, mouseY);
-        System.out.println("(" + pressed.x + ", " + pressed.y + ")");
+        System.out.println("(" + pressed.x + ", " + pressed.y + ") " + devMode) ;
 
         switch (devMode) {
             case "o":
@@ -250,6 +264,13 @@ public final class VirtualWorld
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
                 else {
                     world.addEntity(new Obstacle("obstacle", new Point(pressed.x, pressed.y), imageStore.getImageList("obstacle")));
+                }
+                break;
+            case "t":
+                if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof TempObstacle)
+                    world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
+                else {
+                    world.addEntity(new TempObstacle("temp", new Point(pressed.x, pressed.y), imageStore.getImageList("temp")));
                 }
                 break;
             case "p":
@@ -286,6 +307,13 @@ public final class VirtualWorld
                     world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
                 else {
                     world.addEntity(new Gold("gold", new Point(pressed.x, pressed.y), imageStore.getImageList("gold"), 100));
+                }
+                break;
+            case "f":
+                if (world.getOccupancyCell(new Point(pressed.x, pressed.y)) instanceof Furnace)
+                    world.removeEntity(world.getOccupancyCell(new Point(pressed.x, pressed.y)));
+                else {
+                    world.addEntity(new Furnace("furnace", new Point(pressed.x, pressed.y), imageStore.getImageList("furnace"), 100));
                 }
                 break;
         }

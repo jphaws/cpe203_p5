@@ -44,9 +44,12 @@ public class Skeleton extends AbstractMonsterFactory{
     public boolean moveTo(AbstractMoveableEntity Entity, WorldModel world,
                           AbstractEntity target, EventScheduler scheduler) {
         if (adjacent(Entity.getPosition(), target.getPosition())) {
-            world.removeEntity(target);
-            scheduler.unscheduleAllEvents(target);
-            return true;
+            world.getPlayer().decrementHealth();
+            if(world.getPlayer().getHealth() == 0) {
+                world.removeEntity(target);
+                scheduler.unscheduleAllEvents(target);
+                return true;
+            }
         } else {
             Point nextPos = Entity.nextPosition(world, target.getPosition());
 
@@ -60,6 +63,7 @@ public class Skeleton extends AbstractMonsterFactory{
             }
             return false;
         }
+        return false;
     }
 
     public Point getSpawn() {

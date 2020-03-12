@@ -208,6 +208,14 @@ final class WorldModel {
       }
    }
 
+   public Player getPlayer() {
+      for(AbstractEntity e : entities){
+         if((e instanceof Player)){
+            return (Player) e;
+         }
+      }
+      return null;
+   }
    public void removeEntity(AbstractEntity entity)
    {
       removeEntityAt(entity.getPosition());

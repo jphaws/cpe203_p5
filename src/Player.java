@@ -14,6 +14,7 @@ public class Player extends AbstractAnimatedEntity{
         3 = right
      */
     private int goldCount;
+    private int health = 3;
     private List<PImage> fullList = super.getImages();
 
     public Player(String id, Point position,int actionPeriod, int animationPeriod, List<PImage> images, int goldCount) {
@@ -68,6 +69,14 @@ public class Player extends AbstractAnimatedEntity{
             List<PImage> move = new LinkedList<PImage>();
             move.add(fullList.get(n));
             return move;
+    }
+
+    public void decrementHealth() {
+        health--;
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     public void increaseGoldCount() {

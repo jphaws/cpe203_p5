@@ -33,7 +33,7 @@ public final class VirtualWorld
     private static final String DEFAULT_IMAGE_NAME = "background_default";
     private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-    private String LOAD_FILE_NAME = "world3.sav";
+    private String LOAD_FILE_NAME = "start.sav";
 
     private static final String FAST_FLAG = "-fast";
     private static final String FASTER_FLAG = "-faster";
@@ -48,6 +48,8 @@ public final class VirtualWorld
     private int levelNumber = -1;
     private boolean levelCompleted = false;
 
+    PFont f;
+    private int level = 0;
     private ImageStore imageStore;
     private WorldModel world;
     private WorldView view;
@@ -63,6 +65,8 @@ public final class VirtualWorld
        Processing entry point for "sketch" setup.
     */
     public void setup() {
+        f = createFont("Arial", 16, true);
+
         this.imageStore = new ImageStore(
                 createImageColored(TILE_WIDTH, TILE_HEIGHT, DEFAULT_IMAGE_COLOR));
         this.world = new WorldModel(WORLD_ROWS, WORLD_COLS,
@@ -92,18 +96,22 @@ public final class VirtualWorld
                 case 0:
                     LOAD_FILE_NAME = "world.sav";
                     setup();
+                    level = 1;
                     break;
                 case 1:
                     LOAD_FILE_NAME = "world2.sav";
                     setup();
+                    level = 2;
                     break;
                 case 2:
                     LOAD_FILE_NAME = "world3.sav";
                     setup();
+                    level = 3;
                     break;
             }
             levelCompleted = false;
         }
+
         if(player.getGoldCount() >= 10){
             world.removeTempObstacles(scheduler);
         }
@@ -113,6 +121,20 @@ public final class VirtualWorld
             next_time = time + TIMER_ACTION_PERIOD;
         }
         view.drawViewport();
+
+        //Supposed to display health and gold count, and also enemies gold count
+        textFont(f,16);
+        fill(9);
+        text("Health: " + player.getHealth(),10,20);
+        text("GOLD Count: " + player.getGoldCount(),100,20);
+        text("LEVEL: " + level,600,20);
+
+        if(player.getHealth() == 0) {
+            textFont(f, 60);
+            text("U LOOSE!",500,300);
+            text("GAME OVER!",450,500);
+        }
+
     }
 
     public void keyPressed() {
@@ -148,7 +170,6 @@ public final class VirtualWorld
                 world.removeEntity(world.getOccupancyCell(pt));
                 world.moveEntity(player, pt);
                 player.increaseGoldCount();
-                System.out.println(player.getGoldCount());
             }
             else if (world.getOccupancyCell(pt) instanceof Portal) {
                 levelNumber++;
@@ -167,23 +188,23 @@ public final class VirtualWorld
         }
         int vx = 0;
         int vy = 0;
-//        if(key == 'w') {
-//            vy -= 1;
-//            WorldView v = view;
-//            v.shiftView(vx, vy);
-//        } else if(key == 's') {
-//            vy += 1;
-//            WorldView v = view;
-//            v.shiftView(vx, vy);
-//        } else if(key == 'a'){
-//            vx -= 1;
-//            WorldView v = view;
-//            v.shiftView(vx, vy);
-//        } else if(key == 'd') {
-//            vx += 1;
-//            WorldView v = view;
-//            v.shiftView(vx, vy);
-//        }
+        if(key == 'w') {
+            vy -= 1;
+            WorldView v = view;
+            v.shiftView(vx, vy);
+        } else if(key == 's') {
+            vy += 1;
+            WorldView v = view;
+            v.shiftView(vx, vy);
+        } else if(key == 'a'){
+            vx -= 1;
+            WorldView v = view;
+            v.shiftView(vx, vy);
+        } else if(key == 'd') {
+            vx += 1;
+            WorldView v = view;
+            v.shiftView(vx, vy);
+        }
 
         if (key == '~') {
             devModeLock = false;

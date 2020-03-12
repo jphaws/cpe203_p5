@@ -1,3 +1,7 @@
+derp derp 1 28
+derp derp 38 28
+ghost ghost 3 28 100 982 100
+ghost ghost 36 28 100 982 100
 obstacle obstacle 15 6
 skeleton skeleton 33 23 1000 982 100
 skeleton skeleton 31 8 1000 982 100
@@ -19,7 +23,6 @@ gold gold 20 6 1000000
 gold gold 8 15 1000000
 skeleton skeleton 31 21 1000 982 100
 skeleton skeleton 4 25 1000 982 100
-gold gold 19 10 1000000
 gold gold 20 23 1000000
 skeleton skeleton 37 27 1000 982 100
 gold gold 20 19 1000000
@@ -37,7 +40,6 @@ skeleton skeleton 25 16 1000 982 100
 gold gold 19 6 1000000
 gold gold 19 2 1000000
 gold gold 19 19 1000000
-gold gold 20 10 1000000
 gold gold 20 27 1000000
 skeleton skeleton 25 13 1000 982 100
 temp temp 12 12

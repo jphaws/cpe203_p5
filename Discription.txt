@@ -1,0 +1,11 @@
+!!!NEW DEVELOPER MODE!!!
+    We also created a developer mode where you can make maps without having to manually input points. When in dev mode
+you will be able to add entities and remove entities. Once you are satisfied with your map placement of all the entities,
+all you have to do is press the 'l' key and it generates the text you have to copy and paste into a file. Finally, all you
+have to do it add it to a simple switch statement in Virtual World and your ready to play your new level!!!
+    For the skeleton, gold, ghost, and furnace you will need to go into the file and add the animation and action period.
+
+We still used the hierarchy of the entities. We still have abstract classes that help us keep our code sorted and clean.
+We created an entity factory which creates the monsters. We decided not to include obstacles and thing that don't get
+regenerated, so things that only gets parsed into the world from the file. We thought this would be more efficient and
+smarter to do rather than having them go through the entity factory. It would save more time, and would be more efficient.
